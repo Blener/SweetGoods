@@ -1,0 +1,25 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Http" Version="2.0.2" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="2.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\SweetGoods.Recipes.Application\SweetGoods.Recipes.Application.csproj" />
+    <ProjectReference Include="..\SweetGoods.Recipes.Domain.Handlers\SweetGoods.Recipes.Domain.Handlers.csproj" />
+    <ProjectReference Include="..\SweetGoods.Recipes.Domain\SweetGoods.Recipes.Domain.csproj" />
+    <ProjectReference Include="..\SweetGoods.Recipes.Infra.Data\SweetGoods.Recipes.Infra.Data.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="Microsoft.Extensions.DependencyInjection.Abstractions">
+      <HintPath>..\..\..\..\Program Files\dotnet\sdk\NuGetFallbackFolder\microsoft.extensions.dependencyinjection.abstractions\2.0.0\lib\netstandard2.0\Microsoft.Extensions.DependencyInjection.Abstractions.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+</Project>

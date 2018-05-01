@@ -1,0 +1,21 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Folder Include="AutoMapper\" />
+    <Folder Include="EventSourcedNormalizers\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="6.2.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\SweetGoods.Recipes.Domain\SweetGoods.Recipes.Domain.csproj" />
+    <ProjectReference Include="..\SweetGoods.Recipes.Infra.Data\SweetGoods.Recipes.Infra.Data.csproj" />
+  </ItemGroup>
+
+</Project>
