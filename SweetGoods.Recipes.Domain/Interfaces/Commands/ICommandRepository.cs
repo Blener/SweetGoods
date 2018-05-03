@@ -1,9 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace SweetGoods.Recipes.Domain.Interfaces
+namespace SweetGoods.Recipes.Domain.Interfaces.Commands
 {
     public interface ICommandRepository<TEntity> : IDisposable where TEntity : class
     {

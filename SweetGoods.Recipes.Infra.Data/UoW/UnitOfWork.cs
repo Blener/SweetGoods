@@ -1,9 +1,6 @@
 ﻿using SweetGoods.Recipes.Domain.Core.Commands;
 using SweetGoods.Recipes.Domain.Interfaces;
 using SweetGoods.Recipes.Infra.Data.Context;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace SweetGoods.Recipes.Infra.Data.UoW
 {

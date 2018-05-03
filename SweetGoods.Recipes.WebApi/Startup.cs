@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
+﻿using System.IO;
 using AutoMapper;
 using MediatR;
 using SweetGoods.Recipes.Infra.CrossCutting.IoC;

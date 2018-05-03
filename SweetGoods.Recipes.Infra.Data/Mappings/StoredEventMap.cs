@@ -2,9 +2,6 @@
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using SweetGoods.Recipes.Domain.Core.Events;
 using SweetGoods.Recipes.Infra.Data.Extensions;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace SweetGoods.Recipes.Infra.Data.Mappings
 {

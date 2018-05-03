@@ -1,6 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
+using System.Linq;
 
 namespace SweetGoods.Recipes.Domain.Core.Models
 {
@@ -9,17 +8,17 @@ namespace SweetGoods.Recipes.Domain.Core.Models
         public override bool Equals(object obj)
         {
             var valueObject = obj as T;
-            return !ReferenceEquals(valueObject, null) && EqualsCore(valueObject);
+            return !ReferenceEquals(valueObject, null);
         }
-
-        protected abstract bool EqualsCore(T other);
 
         public override int GetHashCode()
         {
-            return GetHashCodeCore();
+            return GetHashCodeCore()
+                     .Select(x => x?.GetHashCode() ?? 0)
+                     .Aggregate((x, y) => x ^ y);
         }
 
-        protected abstract int GetHashCodeCore();
+        protected abstract IEnumerable<object> GetHashCodeCore();
 
         public static bool operator ==(ValueObject<T> a, ValueObject<T> b)
         {

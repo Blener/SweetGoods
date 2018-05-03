@@ -1,10 +1,4 @@
-﻿using SweetGoods.Recipes.Infra.Data.Extensions;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Text;
+﻿using Microsoft.EntityFrameworkCore;
 
 namespace SweetGoods.Recipes.Infra.Data.Context
 {

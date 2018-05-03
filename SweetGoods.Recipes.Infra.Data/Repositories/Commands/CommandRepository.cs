@@ -1,14 +1,11 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using SweetGoods.Recipes.Domain.Core.Models;
-using SweetGoods.Recipes.Domain.Interfaces;
+using SweetGoods.Recipes.Domain.Interfaces.Commands;
 using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace SweetGoods.Recipes.Infra.Data.Repositories
+namespace SweetGoods.Recipes.Infra.Data.Repositories.Commands
 {
-    public abstract class CommandRepository<TEntity, TContext> : ICommandRepository<TEntity> where TEntity : Entity where TContext : DbContext
+    public class CommandRepository<TEntity, TContext> : ICommandRepository<TEntity> where TEntity : Entity where TContext : DbContext
     {
         protected readonly TContext Db;
         protected readonly DbSet<TEntity> DbSet;

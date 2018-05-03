@@ -3,7 +3,7 @@ using AutoMapper.QueryableExtensions;
 using SweetGoods.Recipes.Application.Interfaces;
 using SweetGoods.Recipes.Application.ViewModels;
 using SweetGoods.Recipes.Domain.Core.Models;
-using SweetGoods.Recipes.Domain.Interfaces;
+using SweetGoods.Recipes.Domain.Interfaces.Queries;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;

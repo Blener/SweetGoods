@@ -5,9 +5,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Commands\" />
-    <Folder Include="Events\" />
-    <Folder Include="Models\" />
     <Folder Include="Validations\" />
   </ItemGroup>
 

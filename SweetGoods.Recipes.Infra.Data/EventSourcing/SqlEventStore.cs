@@ -1,9 +1,6 @@
 ﻿using Newtonsoft.Json;
 using SweetGoods.Recipes.Domain.Core.Events;
 using SweetGoods.Recipes.Infra.Data.Repositories.EventSourcing;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace SweetGoods.Recipes.Infra.Data.EventSourcing
 {

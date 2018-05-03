@@ -20,6 +20,12 @@ namespace SweetGoods.Recipes.Infra.CrossCutting.Bus
 
         public Task SendCommand<T>(T command) where T : Command
         {
+            if (command.IsValid())
+            {
+                command.NotifyValidationErrors(this);
+                return null;
+            }
+
             return Publish(command);
         }
 
