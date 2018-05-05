@@ -13,6 +13,6 @@ namespace SweetGoods.Recipes.Domain.Events.Recipe
             CategoryAggregateId = categoryAggregateId;
         }
 
-        public Guid CategoryAggregateId { get; set; }
+        public Guid CategoryAggregateId { get; }
     }
 }

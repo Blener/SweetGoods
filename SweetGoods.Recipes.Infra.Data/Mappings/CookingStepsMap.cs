@@ -5,9 +5,9 @@ using SweetGoods.Recipes.Infra.Data.Extensions;
 
 namespace SweetGoods.Recipes.Infra.Data.Mappings
 {
-    public class CookingStepsMap : EntityTypeConfiguration<CookingSteps>
+    public class CookingStepsMap : EntityTypeConfiguration<CookingStep>
     {
-        public override void Map(EntityTypeBuilder<CookingSteps> builder)
+        public override void Map(EntityTypeBuilder<CookingStep> builder)
         {
             builder.Property(x => x.StepAction).HasColumnType("nvarchar(500)");
         }

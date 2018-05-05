@@ -104,19 +104,21 @@ namespace SweetGoods.Recipes.Domain.Handlers.CommandHandlers
 
         public async Task Handle(AddCategory notification)
         {
-            var recipeId = await recipeQueryRepository.GetIdByAggregateId(notification.AggregateId);
-            if (recipeId == 0)
+            var recipeExist = await recipeQueryRepository.ExistAggregateId(notification.AggregateId);
+            if (!recipeExist)
             {
                 await RaiseDomainError(notification, "Couldn't find the requested recipe");
+                return;
             }
 
-            var categoryId = await categoryQueryRepository.GetIdByAggregateId(notification.CategoryAggregateId);
-            if (categoryId == 0)
+            var categoryExist = await categoryQueryRepository.ExistAggregateId(notification.CategoryAggregateId);
+            if (!categoryExist)
             {
                 await RaiseDomainError(notification, "Couldn't find the requested category");
+                return;
             }
 
-            var recipeCategory = new RecipeCategory(recipeId, categoryId);
+            var recipeCategory = new RecipeCategory(notification.RecipeAggregateId, notification.CategoryAggregateId, notification.AggregateId);
 
             recipeCommandRepository.AddRelation(recipeCategory);
 

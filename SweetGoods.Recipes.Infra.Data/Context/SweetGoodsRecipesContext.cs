@@ -27,7 +27,7 @@ namespace SweetGoods.Recipes.Infra.Data.Context
         public DbSet<Category> Categories { get; set; }
         public DbSet<CookingMethod> CookingMethods { get; set; }
         public DbSet<CookingMethodIngredient> CookingMethodIngredients { get; set; }
-        public DbSet<CookingSteps> CookingSteps { get; set; }
+        public DbSet<CookingStep> CookingSteps { get; set; }
         public DbSet<Ingredient> Ingredients { get; set; }
         public DbSet<Recipe> Recipes { get; set; }
         public DbSet<RecipeCategory> RecipeCategories { get; set; }

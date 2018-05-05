@@ -15,28 +15,32 @@ namespace SweetGoods.Recipes.Domain.Handlers.CommandHandlers
                                                IAsyncNotificationHandler<AddNewCookingMethod>,
                                                IAsyncNotificationHandler<UpdateCookingMethod>,
                                                IAsyncNotificationHandler<DeleteCookingMethod>,
-                                               IAsyncNotificationHandler<RestoreDeletedCookingMethod>
+                                               IAsyncNotificationHandler<RestoreDeletedCookingMethod>,
+                                               IAsyncNotificationHandler<AddIngredient>,
+                                               IAsyncNotificationHandler<AddStep>
     {
         private readonly ICookingMethodCommandRepository cookingMethodCommandRepository;
         private readonly ICookingMethodQueryRepository cookingMethodQueryRepository;
         private readonly IRecipeQueryRepository recipeQueryRepository;
+        private readonly IIngredientQueryRepository ingredientQueryRepository;
 
         public CookingMethodCommandHandler(IUnitOfWork uow,
                                            IMediatorHandler bus,
                                            INotificationHandler<DomainNotification> notifications,
                                            ICookingMethodCommandRepository cookingMethodCommandRepository,
                                            ICookingMethodQueryRepository cookingMethodQueryRepository,
-                                           IRecipeQueryRepository recipeQueryRepository) : base(uow, bus, notifications)
+                                           IRecipeQueryRepository recipeQueryRepository,
+                                           IIngredientQueryRepository ingredientQueryRepository) : base(uow, bus, notifications)
         {
             this.cookingMethodCommandRepository = cookingMethodCommandRepository;
             this.cookingMethodQueryRepository = cookingMethodQueryRepository;
             this.recipeQueryRepository = recipeQueryRepository;
+            this.ingredientQueryRepository = ingredientQueryRepository;
         }
 
         public async Task Handle(AddNewCookingMethod notification)
         {
-            var recipeId = await recipeQueryRepository.GetIdByAggregateId(notification.RecipeAggregateId);
-            var cookingMethod = new CookingMethod(recipeId, notification.CookingTime, notification.Description);
+            var cookingMethod = new CookingMethod(notification.RecipeAggregateId, notification.CookingTime, notification.Description);
 
             cookingMethodCommandRepository.Add(cookingMethod);
 
@@ -56,7 +60,7 @@ namespace SweetGoods.Recipes.Domain.Handlers.CommandHandlers
                 return;
             }
 
-            var cookingMethod = new CookingMethod(cookingMethodDb.Id, cookingMethodDb.AggregateId, cookingMethodDb.RecipeId, notification.CookingTime, notification.Description, cookingMethodDb.SoftDeleted);
+            var cookingMethod = new CookingMethod(cookingMethodDb.Id, cookingMethodDb.AggregateId, cookingMethodDb.RecipeAggregateId, notification.CookingTime, notification.Description, cookingMethodDb.SoftDeleted);
 
             cookingMethodCommandRepository.Update(cookingMethod);
 
@@ -93,6 +97,59 @@ namespace SweetGoods.Recipes.Domain.Handlers.CommandHandlers
             if (Commit())
             {
                 await _bus.RaiseEvent(new DeletedCookingMethodRestored(notification.AggregateId));
+            }
+        }
+
+        public async Task Handle(AddIngredient notification)
+        {
+            var cookingMethodExist = await cookingMethodQueryRepository.ExistAggregateId(notification.AggregateId);
+            if (!cookingMethodExist)
+            {
+                await RaiseDomainError(notification, "Couldn't find the requested cooking method");
+            }
+
+            var ingredientExist = await ingredientQueryRepository.ExistAggregateId(notification.IngredientAggregateId);
+            if (!ingredientExist)
+            {
+                await RaiseDomainError(notification, "Couldn't find the requested ingredient");
+            }
+
+            var cookingMethodIngredient = new CookingMethodIngredient(
+                notification.CookingMethodAggregateId,
+                notification.IngredientAggregateId,
+                notification.AggregateId,
+                notification.MeasureType,
+                notification.Measure,
+                notification.Usage);
+
+            cookingMethodCommandRepository.AddRelation(cookingMethodIngredient);
+
+            if (Commit())
+            {
+                await _bus.RaiseEvent(new CookingMethodIngredientAdded(
+                    notification.AggregateId,
+                    notification.IngredientAggregateId,
+                    notification.MeasureType,
+                    notification.Measure,
+                    notification.Usage));
+            }
+        }
+
+        public async Task Handle(AddStep notification)
+        {
+            var cookingMethodExist = await cookingMethodQueryRepository.ExistAggregateId(notification.AggregateId);
+            if (!cookingMethodExist)
+            {
+                await RaiseDomainError(notification, "Couldn't find the requested cooking method");
+            }
+
+            var cookingStep = new CookingStep(notification.AggregateId, notification.CookingMethodAggregateId, notification.StepNumber, notification.StepAction);
+
+            cookingMethodCommandRepository.AddRelation(cookingStep);
+
+            if (Commit())
+            {
+                await _bus.RaiseEvent(new CookingStepAdded(notification.AggregateId, notification.CookingMethodAggregateId, notification.StepNumber, notification.StepAction));
             }
         }
     }

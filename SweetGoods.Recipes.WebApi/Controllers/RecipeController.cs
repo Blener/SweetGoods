@@ -4,15 +4,12 @@ using MediatR;
 using SweetGoods.Recipes.Domain.Core.Notifications;
 using SweetGoods.Recipes.Application.Interfaces.Commands;
 using SweetGoods.Recipes.Application.Interfaces.Queries;
-using SweetGoods.Recipes.Domain.Core.Commands;
 
 namespace SweetGoods.Recipes.WebApi.Controllers
 {
     [Route("Recipe")]
     public class RecipeController : BaseMethodsController<RecipeViewModel>
     {
-        private IAppRecipeCommandService recipeCommandService => commandService as IAppRecipeCommandService;
-
         protected RecipeController(
             INotificationHandler<DomainNotification> notifications,
             IAppBaseCommandService<RecipeViewModel> commandService,
@@ -29,7 +26,7 @@ namespace SweetGoods.Recipes.WebApi.Controllers
                 return Response(viewModel);
             }
 
-            recipeCommandService.AddCategory(viewModel);
+            CommandService<IAppRecipeCommandService>().AddCategory(viewModel);
 
             return Response(viewModel);
         }

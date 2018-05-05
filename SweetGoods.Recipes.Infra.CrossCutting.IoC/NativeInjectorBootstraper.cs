@@ -79,6 +79,8 @@ namespace SweetGoods.Recipes.Infra.CrossCutting.IoC
             services.AddScoped<IAsyncNotificationHandler<DeleteCookingMethod>, CookingMethodCommandHandler>();
             services.AddScoped<IAsyncNotificationHandler<RestoreDeletedCookingMethod>, CookingMethodCommandHandler>();
             services.AddScoped<IAsyncNotificationHandler<UpdateCookingMethod>, CookingMethodCommandHandler>();
+            services.AddScoped<IAsyncNotificationHandler<AddIngredient>, CookingMethodCommandHandler>();
+            services.AddScoped<IAsyncNotificationHandler<AddStep>, CookingMethodCommandHandler>();
 
             //Ingredient
             services.AddScoped<IAsyncNotificationHandler<AddNewIngredient>, IngredientCommandHandler>();
@@ -107,6 +109,8 @@ namespace SweetGoods.Recipes.Infra.CrossCutting.IoC
             services.AddScoped<IAsyncNotificationHandler<CookingMethodDeleted>, CookingMethodEventHandler>();
             services.AddScoped<IAsyncNotificationHandler<DeletedCookingMethodRestored>, CookingMethodEventHandler>();
             services.AddScoped<IAsyncNotificationHandler<CookingMethodUpdated>, CookingMethodEventHandler>();
+            services.AddScoped<IAsyncNotificationHandler<CookingMethodIngredientAdded>, CookingMethodEventHandler>();
+            services.AddScoped<IAsyncNotificationHandler<CookingStepAdded>, CookingMethodEventHandler>();
 
             //Ingredient
             services.AddScoped<IAsyncNotificationHandler<NewIngredientAdded>, IngredientEventHandler>();

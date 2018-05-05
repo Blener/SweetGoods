@@ -7,7 +7,9 @@ namespace SweetGoods.Recipes.Domain.Handlers.EventHandlers
     public class CookingMethodEventHandler : IAsyncNotificationHandler<NewCookingMethodAdded>,
                                              IAsyncNotificationHandler<CookingMethodDeleted>,
                                              IAsyncNotificationHandler<CookingMethodUpdated>,
-                                             IAsyncNotificationHandler<DeletedCookingMethodRestored>
+                                             IAsyncNotificationHandler<DeletedCookingMethodRestored>,
+                                             IAsyncNotificationHandler<CookingMethodIngredientAdded>,
+                                             IAsyncNotificationHandler<CookingStepAdded>
     {
         public async Task Handle(NewCookingMethodAdded notification)
         {
@@ -22,6 +24,14 @@ namespace SweetGoods.Recipes.Domain.Handlers.EventHandlers
         }
 
         public async Task Handle(DeletedCookingMethodRestored notification)
+        {
+        }
+
+        public async Task Handle(CookingMethodIngredientAdded notification)
+        {
+        }
+
+        public async Task Handle(CookingStepAdded notification)
         {
         }
     }

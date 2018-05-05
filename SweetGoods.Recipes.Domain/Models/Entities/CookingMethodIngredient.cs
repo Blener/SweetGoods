@@ -1,21 +1,50 @@
 ﻿using SweetGoods.Recipes.Domain.Core.Models;
 using SweetGoods.Recipes.Domain.Enums;
+using System;
 
 namespace SweetGoods.Recipes.Domain.Models.Entities
 {
     public class CookingMethodIngredient : Entity
     {
         public CookingMethodIngredient(
-            int cookingMethodId,
-            int ingredientId,
+            Guid cookingMethodAggregateId,
+            Guid ingredientAggregateId,
+            Guid aggregateId,
+            int measureType,
+            decimal measure,
+            string usage) : this(cookingMethodAggregateId, ingredientAggregateId, aggregateId, (MeasureType)measureType, measure, usage)
+        {
+        }
+
+        public CookingMethodIngredient(
+            Guid cookingMethodAggregateId,
+            Guid ingredientAggregateId,
+            Guid aggregateId,
+            MeasureType measureType,
+            decimal measure,
+            string usage)
+        {
+            CookingMethodAggregateId = cookingMethodAggregateId;
+            IngredientAggregateId = ingredientAggregateId;
+            AggregateId = aggregateId;
+            MeasureType = measureType;
+            Measure = measure;
+            Usage = usage;
+        }
+
+        public CookingMethodIngredient(
+            Guid cookingMethodAggregateId,
+            Guid ingredientAggregateId,
+            Guid aggregateId,
             MeasureType measureType,
             decimal measure,
             string usage,
             CookingMethod cookingMethod,
             Ingredient ingredient)
         {
-            CookingMethodId = cookingMethodId;
-            IngredientId = ingredientId;
+            CookingMethodAggregateId = cookingMethodAggregateId;
+            IngredientAggregateId = ingredientAggregateId;
+            AggregateId = aggregateId;
             MeasureType = measureType;
             Measure = measure;
             Usage = usage;
@@ -27,9 +56,9 @@ namespace SweetGoods.Recipes.Domain.Models.Entities
         {
         }
 
-        public int CookingMethodId { get; private set; }
+        public Guid CookingMethodAggregateId { get; private set; }
 
-        public int IngredientId { get; private set; }
+        public Guid IngredientAggregateId { get; private set; }
 
         public MeasureType MeasureType { get; private set; }
 

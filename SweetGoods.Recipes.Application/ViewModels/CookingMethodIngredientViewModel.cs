@@ -9,8 +9,8 @@ namespace SweetGoods.Recipes.Application.ViewModels
         [JsonProperty("CookingMethodId")]
         public Guid CookingMethodAggregateId { get; set; }
 
-        [JsonProperty("CookingMethodIngredientId")]
-        public Guid CookingMethodIngredientAggregateId { get; set; }
+        [JsonProperty("IngredientId")]
+        public Guid IngredientAggregateId { get; set; }
 
         public MeasureType MeasureType { get; set; }
 

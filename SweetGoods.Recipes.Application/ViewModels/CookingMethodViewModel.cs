@@ -16,6 +16,6 @@ namespace SweetGoods.Recipes.Application.ViewModels
 
         public ICollection<CookingMethodIngredientViewModel> Ingredients { get; set; }
 
-        public ICollection<CookingStepsViewModel> Steps { get; set; }
+        public ICollection<CookingStepViewModel> Steps { get; set; }
     }
 }

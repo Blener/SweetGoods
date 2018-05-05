@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using SweetGoods.Recipes.Domain.Core.Models;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Security.Cryptography.X509Certificates;
 
 namespace SweetGoods.Recipes.Infra.Data.Extensions
 {
@@ -11,6 +12,7 @@ namespace SweetGoods.Recipes.Infra.Data.Extensions
             var builder = modelBuilder.Entity<TEntity>();
             builder.Property(x => x.Id)
                 .HasAnnotation("DatabaseGenerated", DatabaseGeneratedOption.Identity);
+            builder.HasKey(x => x.AggregateId);
 
             configuration.Map(builder);
         }

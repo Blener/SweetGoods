@@ -8,7 +8,7 @@ namespace SweetGoods.Recipes.Infra.Data.Mappings
     {
         public override void Map(EntityTypeBuilder<RecipeCategory> builder)
         {
-            builder.HasOne(x => x.Category).WithMany().HasForeignKey(x => x.CategoryId);
+            builder.HasOne(x => x.Category).WithMany().HasForeignKey(x => x.CategoryAggregateId);
 
             builder.HasOne(x => x.Recipe).WithMany(x => x.RecipeCategories);
         }

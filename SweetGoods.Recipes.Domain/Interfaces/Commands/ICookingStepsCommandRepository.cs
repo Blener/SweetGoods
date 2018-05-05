@@ -2,7 +2,7 @@
 
 namespace SweetGoods.Recipes.Domain.Interfaces.Commands
 {
-    public interface ICookingStepsCommandRepository : ICommandRepository<CookingSteps>
+    public interface ICookingStepsCommandRepository : ICommandRepository<CookingStep>
     {
     }
 }

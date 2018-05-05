@@ -18,7 +18,7 @@ namespace SweetGoods.Recipes.Infra.Data.Mappings
 
             builder.HasMany(x => x.Ingredients).WithOne(x => x.CookingMethod);
 
-            builder.HasMany(x => x.Steps).WithOne().HasForeignKey(x => x.CookingMethodId);
+            builder.HasMany(x => x.Steps).WithOne().HasForeignKey(x => x.CookingMethodAggregateId);
 
             builder.HasOne(x => x.Recipe).WithMany(x => x.CookingMethods);
 

@@ -10,6 +10,6 @@ namespace SweetGoods.Recipes.Domain.Interfaces.Queries
 
         IQueryable<TEntity> GetAll();
 
-        Task<int> GetIdByAggregateId(Guid aggregateId);
+        Task<bool> ExistAggregateId(Guid aggregateId);
     }
 }
