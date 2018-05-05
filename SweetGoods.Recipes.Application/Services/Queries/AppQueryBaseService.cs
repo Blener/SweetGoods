@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using AutoMapper.QueryableExtensions;
-using SweetGoods.Recipes.Application.Interfaces;
+using SweetGoods.Recipes.Application.Interfaces.Queries;
 using SweetGoods.Recipes.Application.ViewModels;
 using SweetGoods.Recipes.Domain.Core.Models;
 using SweetGoods.Recipes.Domain.Interfaces.Queries;
@@ -8,12 +8,12 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace SweetGoods.Recipes.Application.Services
+namespace SweetGoods.Recipes.Application.Services.Queries
 {
-    public abstract class AppQueryBaseService<TEntity, TViewModel> : IAppQueryBaseService<TViewModel> where TEntity : Entity where TViewModel : ViewModel
+    public abstract class AppQueryBaseService<TEntity, TViewModel> : IAppBaseQueryService<TViewModel> where TEntity : Entity where TViewModel : ViewModel
     {
         protected readonly IQueryRepository<TEntity> queryRepository;
-        private readonly IMapper mapper;
+        protected readonly IMapper mapper;
 
         public AppQueryBaseService(IQueryRepository<TEntity> queryRepository, IMapper mapper)
         {

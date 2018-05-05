@@ -49,7 +49,7 @@ namespace SweetGoods.Recipes.Domain.Handlers.CommandHandlers
 
             if (ingredientDb == null)
             {
-                await _bus.RaiseEvent(notification.RaiseError("Couldn't find the requested ingredient."));
+                await RaiseDomainError(notification, "Couldn't find the requested ingredient.");
                 return;
             }
 
@@ -65,7 +65,7 @@ namespace SweetGoods.Recipes.Domain.Handlers.CommandHandlers
 
         public async Task Handle(DeleteIngredient notification)
         {
-            ingredientCommandRepository.Remove(notification.AggregateId);
+            await ingredientCommandRepository.Remove(notification.AggregateId);
 
             if (Commit())
             {
@@ -79,13 +79,13 @@ namespace SweetGoods.Recipes.Domain.Handlers.CommandHandlers
 
             if (ingredientDb == null)
             {
-                await _bus.RaiseEvent(notification.RaiseError("Couldn't find the requested ingredient."));
+                await RaiseDomainError(notification, "Couldn't find the requested ingredient.");
                 return;
             }
 
-            ingredientDb.RestoreDeleted();
+            var restoredIngredient = ingredientDb.GetRestored();
 
-            ingredientCommandRepository.Update(ingredientDb);
+            ingredientCommandRepository.Update(restoredIngredient);
 
             if (Commit())
             {

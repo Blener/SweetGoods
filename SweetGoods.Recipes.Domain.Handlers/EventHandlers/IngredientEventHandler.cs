@@ -1,5 +1,4 @@
 ﻿using MediatR;
-using SweetGoods.Recipes.Domain.Events.CookingMethod;
 using SweetGoods.Recipes.Domain.Events.Ingredient;
 using System.Threading.Tasks;
 

@@ -3,9 +3,9 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace SweetGoods.Recipes.Application.Interfaces
+namespace SweetGoods.Recipes.Application.Interfaces.Queries
 {
-    public interface IAppQueryBaseService<TViewModel> : IDisposable where TViewModel : ViewModel
+    public interface IAppBaseQueryService<TViewModel> : IDisposable where TViewModel : ViewModel
     {
         Task<TViewModel> GetByAggregateId(Guid aggregateId);
 

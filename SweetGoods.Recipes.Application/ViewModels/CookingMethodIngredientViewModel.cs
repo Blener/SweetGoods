@@ -1,0 +1,21 @@
+﻿using Newtonsoft.Json;
+using SweetGoods.Recipes.Domain.Enums;
+using System;
+
+namespace SweetGoods.Recipes.Application.ViewModels
+{
+    public class CookingMethodIngredientViewModel : ViewModel
+    {
+        [JsonProperty("CookingMethodId")]
+        public Guid CookingMethodAggregateId { get; set; }
+
+        [JsonProperty("CookingMethodIngredientId")]
+        public Guid CookingMethodIngredientAggregateId { get; set; }
+
+        public MeasureType MeasureType { get; set; }
+
+        public decimal Measure { get; set; }
+
+        public string Usage { get; set; }
+    }
+}

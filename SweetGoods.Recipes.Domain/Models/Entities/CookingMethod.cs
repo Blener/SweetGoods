@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace SweetGoods.Recipes.Domain.Models.Entities
 {
-    public class CookingMethod : SoftDeleteEntity
+    public class CookingMethod : SoftDeleteEntity<CookingMethod>
     {
         public CookingMethod(
             int id,
@@ -49,16 +49,21 @@ namespace SweetGoods.Recipes.Domain.Models.Entities
         {
         }
 
-        public int RecipeId { get; }
+        public int RecipeId { get; private set; }
 
-        public TimeSpan CookingTime { get; }
+        public TimeSpan CookingTime { get; private set; }
 
-        public DescriptionValueObject Description { get; }
+        public DescriptionValueObject Description { get; private set; }
 
-        public virtual Recipe Recipe { get; }
+        public virtual Recipe Recipe { get; private set; }
 
-        public virtual ICollection<CookingMethodIngredient> Ingredients { get; }
+        public virtual ICollection<CookingMethodIngredient> Ingredients { get; private set; }
 
-        public virtual ICollection<CookingSteps> Steps { get; }
+        public virtual ICollection<CookingSteps> Steps { get; private set; }
+
+        public override CookingMethod GetRestored()
+        {
+            return new CookingMethod(Id, AggregateId, RecipeId, CookingTime, Description, NotDeleted);
+        }
     }
 }

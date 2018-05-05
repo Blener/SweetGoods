@@ -6,26 +6,25 @@ namespace SweetGoods.Recipes.Domain.Core.Notifications
 {
     public class DomainNotificationHandler : INotificationHandler<DomainNotification>
     {
-        private List<DomainNotification> _notifications;
+        private List<DomainNotification> notifications;
 
         public DomainNotificationHandler()
         {
-            _notifications = new List<DomainNotification>();
+            notifications = new List<DomainNotification>();
         }
 
-        public void Handle(DomainNotification message)
-        {
-            _notifications.Add(message);
-        }
+        public void Handle(DomainNotification notification) => notifications.Add(notification);
 
-        public virtual List<DomainNotification> GetNotifications() => _notifications;
+        public virtual List<DomainNotification> GetNotifications() => notifications;
 
-        public virtual List<DomainNotification> GetErrors() => _notifications.Where(x => !x.Success).ToList();
+        public virtual List<DomainNotification> GetErrors() => notifications.Where(x => !x.Success).ToList();
 
-        public virtual List<DomainNotification> GetConfirmations() => _notifications.Where(x => x.Success).ToList();
+        public virtual List<DomainNotification> GetConfirmations() => notifications.Where(x => x.Success).ToList();
 
-        public virtual bool HasErrors() => GetNotifications().Any(x => !x.Success);
+        public virtual bool HasNotifications() => GetNotifications().Count > 0;
 
-        public void Dispose() => _notifications = new List<DomainNotification>();
+        public virtual bool HasErrors() => GetErrors().Count > 0;
+
+        public void Dispose() => notifications = new List<DomainNotification>();
     }
 }

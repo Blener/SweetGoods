@@ -4,7 +4,7 @@ using System;
 
 namespace SweetGoods.Recipes.Domain.Models.Entities
 {
-    public class Ingredient : SoftDeleteEntity
+    public class Ingredient : SoftDeleteEntity<Ingredient>
     {
         public Ingredient(int id, Guid aggregateId, NameValueObject name, string details, bool softDeleted) : this(name, details)
         {
@@ -23,8 +23,13 @@ namespace SweetGoods.Recipes.Domain.Models.Entities
         {
         }
 
-        public NameValueObject Name { get; }
+        public NameValueObject Name { get; private set; }
 
-        public string Details { get; }
+        public string Details { get; private set; }
+
+        public override Ingredient GetRestored()
+        {
+            return new Ingredient(Id, AggregateId, Name, Details, NotDeleted);
+        }
     }
 }

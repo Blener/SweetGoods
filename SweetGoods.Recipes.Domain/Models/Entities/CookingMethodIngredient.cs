@@ -27,18 +27,18 @@ namespace SweetGoods.Recipes.Domain.Models.Entities
         {
         }
 
-        public int CookingMethodId { get; }
+        public int CookingMethodId { get; private set; }
 
-        public int IngredientId { get; }
+        public int IngredientId { get; private set; }
 
-        public MeasureType MeasureType { get; }
+        public MeasureType MeasureType { get; private set; }
 
-        public decimal Measure { get; }
+        public decimal Measure { get; private set; }
 
-        public string Usage { get; }
+        public string Usage { get; private set; }
 
-        public virtual CookingMethod CookingMethod { get; }
+        public virtual CookingMethod CookingMethod { get; private set; }
 
-        public virtual Ingredient Ingredient { get; }
+        public virtual Ingredient Ingredient { get; private set; }
     }
 }

@@ -1,13 +1,13 @@
 ﻿using AutoMapper;
-using SweetGoods.Recipes.Application.Interfaces;
+using SweetGoods.Recipes.Application.Interfaces.Commands;
 using SweetGoods.Recipes.Application.ViewModels;
 using SweetGoods.Recipes.Domain.Core.Bus;
 using SweetGoods.Recipes.Domain.Core.Commands;
 using System;
 
-namespace SweetGoods.Recipes.Application.Services
+namespace SweetGoods.Recipes.Application.Services.Commands
 {
-    public abstract class AppCommandBaseService<TViewModel> : IAppCommandBaseService<TViewModel> where TViewModel : ViewModel
+    public abstract class AppCommandBaseService<TViewModel> : IAppBaseCommandService<TViewModel> where TViewModel : ViewModel
     {
         private readonly IMediatorHandler bus;
         private readonly IMapper mapper;
@@ -18,10 +18,18 @@ namespace SweetGoods.Recipes.Application.Services
             this.mapper = mapper;
         }
 
+        public abstract void Add(TViewModel viewModel);
+
         public void Dispose()
         {
             GC.SuppressFinalize(this);
         }
+
+        public abstract void Remove(Guid aggregateId);
+
+        public abstract void Restore(Guid aggregateId);
+
+        public abstract void Update(TViewModel viewModel);
 
         protected void MapAndSendCommand<TCommand>(TViewModel viewModel) where TCommand : Command => bus.SendCommand(mapper.Map<TCommand>(viewModel));
 

@@ -34,7 +34,7 @@ namespace SweetGoods.Recipes.Domain.Handlers.CommandHandlers
         {
             if (await recipeQueryRepository.NameExist(notification.Name.Name))
             {
-                await _bus.RaiseEvent(notification.RaiseError("A recipe with that name already exist."));
+                await RaiseDomainError(notification, "A recipe with that name already exist.");
                 return;
             }
 
@@ -54,7 +54,7 @@ namespace SweetGoods.Recipes.Domain.Handlers.CommandHandlers
 
             if (recipeDb == null)
             {
-                await _bus.RaiseEvent(notification.RaiseError("Couldn't find the requested recipe."));
+                await RaiseDomainError(notification, "Couldn't find the requested recipe.");
                 return;
             }
 
@@ -70,7 +70,7 @@ namespace SweetGoods.Recipes.Domain.Handlers.CommandHandlers
 
         public async Task Handle(DeleteRecipe notification)
         {
-            recipeCommandRepository.Remove(notification.AggregateId);
+            await recipeCommandRepository.Remove(notification.AggregateId);
 
             if (Commit())
             {
@@ -84,13 +84,13 @@ namespace SweetGoods.Recipes.Domain.Handlers.CommandHandlers
 
             if (recipeDb == null)
             {
-                await _bus.RaiseEvent(notification.RaiseError("Couldn't find the requested recipe."));
+                await RaiseDomainError(notification, "Couldn't find the requested recipe.");
                 return;
             }
 
-            recipeDb.RestoreDeleted();
+            var restoredRecipe = recipeDb.GetRestored();
 
-            recipeCommandRepository.Update(recipeDb);
+            recipeCommandRepository.Update(restoredRecipe);
 
             if (Commit())
             {

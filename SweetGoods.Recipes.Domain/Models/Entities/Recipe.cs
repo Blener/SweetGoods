@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace SweetGoods.Recipes.Domain.Models.Entities
 {
-    public class Recipe : SoftDeleteEntity
+    public class Recipe : SoftDeleteEntity<Recipe>
     {
         internal Recipe()
         {
@@ -36,12 +36,17 @@ namespace SweetGoods.Recipes.Domain.Models.Entities
             CookingMethods = new HashSet<CookingMethod>();
         }
 
-        public NameValueObject Name { get; }
+        public NameValueObject Name { get; private set; }
 
-        public DescriptionValueObject Description { get; }
+        public DescriptionValueObject Description { get; private set; }
 
-        public virtual ICollection<RecipeCategory> RecipeCategories { get; }
+        public virtual ICollection<RecipeCategory> RecipeCategories { get; private set; }
 
-        public virtual ICollection<CookingMethod> CookingMethods { get; }
+        public virtual ICollection<CookingMethod> CookingMethods { get; private set; }
+
+        public override Recipe GetRestored()
+        {
+            return new Recipe(Id, AggregateId, Name, Description, NotDeleted);
+        }
     }
 }

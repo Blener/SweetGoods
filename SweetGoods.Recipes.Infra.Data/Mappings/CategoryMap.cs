@@ -22,10 +22,6 @@ namespace SweetGoods.Recipes.Infra.Data.Mappings
                 .HasColumnName("Description")
                 .HasColumnType("nvarchar(500)")
                 .HasMaxLength(500);
-
-            builder.Property(x => x.CategoryType).HasColumnType("int");
-
-            builder.ToTable("Recipes");
         }
     }
 }

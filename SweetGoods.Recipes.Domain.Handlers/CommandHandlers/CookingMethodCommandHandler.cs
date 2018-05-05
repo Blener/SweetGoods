@@ -52,7 +52,7 @@ namespace SweetGoods.Recipes.Domain.Handlers.CommandHandlers
 
             if (cookingMethodDb == null)
             {
-                await _bus.RaiseEvent(notification.RaiseError("Couldn't find the requested cooking method."));
+                await RaiseDomainError(notification, "Couldn't find the requested cooking method.");
                 return;
             }
 
@@ -68,7 +68,7 @@ namespace SweetGoods.Recipes.Domain.Handlers.CommandHandlers
 
         public async Task Handle(DeleteCookingMethod notification)
         {
-            cookingMethodCommandRepository.Remove(notification.AggregateId);
+            await cookingMethodCommandRepository.Remove(notification.AggregateId);
 
             if (Commit())
             {
@@ -82,13 +82,13 @@ namespace SweetGoods.Recipes.Domain.Handlers.CommandHandlers
 
             if (cookingMethodDb == null)
             {
-                await _bus.RaiseEvent(notification.RaiseError("Couldn't find the requested cooking method."));
+                await RaiseDomainError(notification, "Couldn't find the requested cooking method.");
                 return;
             }
 
-            cookingMethodDb.RestoreDeleted();
+            var restoredCookingMethod = cookingMethodDb.GetRestored();
 
-            cookingMethodCommandRepository.Update(cookingMethodDb);
+            cookingMethodCommandRepository.Update(restoredCookingMethod);
 
             if (Commit())
             {

@@ -5,11 +5,13 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace SweetGoods.Recipes.WebApi.Controllers
 {
-    public abstract class ApiController : ControllerBase
+    [Produces("application/json")]
+    [Route("api/v1/Recipes/")]
+    public abstract class BaseApiController : ControllerBase
     {
         private readonly DomainNotificationHandler _notifications;
 
-        protected ApiController(INotificationHandler<DomainNotification> notifications)
+        protected BaseApiController(INotificationHandler<DomainNotification> notifications)
         {
             _notifications = (DomainNotificationHandler)notifications;
         }

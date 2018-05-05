@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 
 namespace SweetGoods.Recipes.Domain.Interfaces.Commands
 {
@@ -8,6 +9,6 @@ namespace SweetGoods.Recipes.Domain.Interfaces.Commands
 
         void Update(TEntity obj);
 
-        void Remove(Guid id);
+        Task Remove(Guid id);
     }
 }

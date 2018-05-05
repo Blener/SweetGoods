@@ -30,12 +30,15 @@ namespace SweetGoods.Recipes.Infra.Data.Repositories.Queries
 
         public Task<TEntity> GetByAggregateId(Guid aggregateId)
         {
-            return DbSet.FirstOrDefaultAsync(x => x.AggregateId == aggregateId);
+            return DbSet
+                .AsNoTracking()
+                .FirstOrDefaultAsync(x => x.AggregateId == aggregateId);
         }
 
         public Task<int> GetIdByAggregateId(Guid aggregateId)
         {
             return DbSet
+                .AsNoTracking()
                 .Where(x => x.AggregateId == aggregateId)
                 .Select(x => x.Id)
                 .FirstOrDefaultAsync();

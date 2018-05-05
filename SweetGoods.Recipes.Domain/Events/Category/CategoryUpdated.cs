@@ -15,6 +15,14 @@ namespace SweetGoods.Recipes.Domain.Events.Category
             CategoryType = categoryType;
         }
 
+        public CategoryUpdated(
+            Guid aggregateId,
+            NameValueObject name,
+            DescriptionValueObject description,
+            int categoryType) : this(aggregateId, name, description, (CategoryType)categoryType)
+        {
+        }
+
         public NameValueObject Name { get; }
 
         public DescriptionValueObject Description { get; }

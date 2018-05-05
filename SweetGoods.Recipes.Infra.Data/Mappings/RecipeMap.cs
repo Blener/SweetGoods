@@ -26,8 +26,6 @@ namespace SweetGoods.Recipes.Infra.Data.Mappings
             builder.HasMany(x => x.RecipeCategories).WithOne(x => x.Recipe);
 
             builder.HasMany(x => x.CookingMethods).WithOne(x => x.Recipe);
-
-            builder.ToTable("Recipes");
         }
     }
 }

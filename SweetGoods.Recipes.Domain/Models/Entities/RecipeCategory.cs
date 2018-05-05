@@ -16,12 +16,12 @@ namespace SweetGoods.Recipes.Domain.Models.Entities
         {
         }
 
-        public int RecipeId { get; }
+        public int RecipeId { get; private set; }
 
-        public int CategoryId { get; }
+        public int CategoryId { get; private set; }
 
-        public virtual Recipe Recipe { get; }
+        public virtual Recipe Recipe { get; private set; }
 
-        public virtual Category Category { get; }
+        public virtual Category Category { get; private set; }
     }
 }

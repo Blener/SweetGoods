@@ -5,9 +5,19 @@ using System;
 
 namespace SweetGoods.Recipes.Domain.Models.Entities
 {
-    public class Category : SoftDeleteEntity
+    public class Category : SoftDeleteEntity<Category>
     {
         internal Category()
+        {
+        }
+
+        public Category(
+            int id,
+            Guid aggregateId,
+            NameValueObject name,
+            DescriptionValueObject description,
+            int categoryType,
+            bool softDeleted) : this(id, aggregateId, name, description, (CategoryType)categoryType, softDeleted)
         {
         }
 
@@ -31,13 +41,18 @@ namespace SweetGoods.Recipes.Domain.Models.Entities
         {
             Name = name;
             Description = description;
-            CategoryType = categoryType;
+            CategoryType = (int)categoryType;
         }
 
-        public NameValueObject Name { get; }
+        public NameValueObject Name { get; private set; }
 
-        public DescriptionValueObject Description { get; }
+        public DescriptionValueObject Description { get; private set; }
 
-        public CategoryType CategoryType { get; }
+        public int CategoryType { get; private set; }
+
+        public override Category GetRestored()
+        {
+            return new Category(Id, AggregateId, Name, Description, CategoryType, NotDeleted);
+        }
     }
 }

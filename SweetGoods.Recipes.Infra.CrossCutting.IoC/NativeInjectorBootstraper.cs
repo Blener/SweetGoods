@@ -1,6 +1,10 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
+using SweetGoods.Recipes.Application.Interfaces.Commands;
+using SweetGoods.Recipes.Application.Interfaces.Queries;
+using SweetGoods.Recipes.Application.Services.Commands;
+using SweetGoods.Recipes.Application.Services.Queries;
 using SweetGoods.Recipes.Domain.Commands.Category;
 using SweetGoods.Recipes.Domain.Commands.CookingMethod;
 using SweetGoods.Recipes.Domain.Commands.Ingredient;
@@ -27,17 +31,33 @@ using SweetGoods.Recipes.Infra.Data.UoW;
 
 namespace SweetGoods.Recipes.Infra.CrossCutting.IoC
 {
-    public static class NativeInjectorBootstraper
+    public class NativeInjectorBootstraper
     {
         public static void RegisterServices(IServiceCollection services)
         {
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
-            RegisterDomainServices(services);
+            RegisterApplicationServices(services);
             RegisterDomainCommands(services);
+            RegisterDomainServices(services);
             RegisterDomainEvents(services);
             RegisterInfraServices(services);
             RegisterInfraRepositories(services);
+        }
+
+        private static void RegisterApplicationServices(IServiceCollection services)
+        {
+            //Commands
+            services.AddScoped<IAppCategoryCommandService, AppCategoryCommandService>();
+            services.AddScoped<IAppCookingMethodCommandService, AppCookingMethodCommandService>();
+            services.AddScoped<IAppIngredientCommandService, AppIngredientCommandService>();
+            services.AddScoped<IAppRecipeCommandService, AppRecipeCommandService>();
+
+            //Queries
+            services.AddScoped<IAppCategoryQueryService, AppCategoryQueryService>();
+            services.AddScoped<IAppCookingMethodQueryService, AppCookingMethodQueryService>();
+            services.AddScoped<IAppIngredientQueryService, AppIngredientQueryService>();
+            services.AddScoped<IAppRecipeQueryService, AppRecipeQueryService>();
         }
 
         private static void RegisterDomainServices(IServiceCollection services)

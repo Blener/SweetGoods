@@ -7,12 +7,24 @@ namespace SweetGoods.Recipes.Domain.Events.Category
 {
     public class NewCategoryAdded : Event
     {
-        public NewCategoryAdded(Guid aggregateId, NameValueObject name, DescriptionValueObject description, CategoryType categoryType)
+        public NewCategoryAdded(
+            Guid aggregateId,
+            NameValueObject name,
+            DescriptionValueObject description,
+            CategoryType categoryType)
         {
             AggregateId = aggregateId;
             Name = name;
             Description = description;
             CategoryType = categoryType;
+        }
+
+        public NewCategoryAdded(
+            Guid aggregateId,
+            NameValueObject name,
+            DescriptionValueObject description,
+            int categoryType) : this(aggregateId, name, description, (CategoryType)categoryType)
+        {
         }
 
         public NameValueObject Name { get; }

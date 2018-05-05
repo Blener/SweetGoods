@@ -15,10 +15,10 @@ namespace SweetGoods.Recipes.Domain.Models.Entities
         {
         }
 
-        public int CookingMethodId { get; }
+        public int CookingMethodId { get; private set; }
 
-        public int StepNumber { get; }
+        public int StepNumber { get; private set; }
 
-        public string StepAction { get; }
+        public string StepAction { get; private set; }
     }
 }

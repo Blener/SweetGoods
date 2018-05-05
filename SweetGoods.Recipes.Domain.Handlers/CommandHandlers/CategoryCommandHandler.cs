@@ -34,7 +34,7 @@ namespace SweetGoods.Recipes.Domain.Handlers.CommandHandlers
         {
             if (await categoryQueryRepository.NameExist(notification.Name.Name))
             {
-                await _bus.RaiseEvent(notification.RaiseError("A category with that name already exist."));
+                await RaiseDomainError(notification, "A category with that name already exist.");
                 return;
             }
 
@@ -54,7 +54,7 @@ namespace SweetGoods.Recipes.Domain.Handlers.CommandHandlers
 
             if (categoryDb == null)
             {
-                await _bus.RaiseEvent(notification.RaiseError("Couldn't find the requested category."));
+                await RaiseDomainError(notification, "Couldn't find the requested category.");
                 return;
             }
 
@@ -70,7 +70,7 @@ namespace SweetGoods.Recipes.Domain.Handlers.CommandHandlers
 
         public async Task Handle(DeleteCategory notification)
         {
-            categoryCommandRepository.Remove(notification.AggregateId);
+            await categoryCommandRepository.Remove(notification.AggregateId);
 
             if (Commit())
             {
@@ -84,13 +84,13 @@ namespace SweetGoods.Recipes.Domain.Handlers.CommandHandlers
 
             if (categoryDb == null)
             {
-                await _bus.RaiseEvent(notification.RaiseError("Couldn't find the requested category."));
+                await RaiseDomainError(notification, "Couldn't find the requested category.");
                 return;
             }
 
-            categoryDb.RestoreDeleted();
+            var restoredCategory = categoryDb.GetRestored();
 
-            categoryCommandRepository.Update(categoryDb);
+            categoryCommandRepository.Update(restoredCategory);
 
             if (Commit())
             {

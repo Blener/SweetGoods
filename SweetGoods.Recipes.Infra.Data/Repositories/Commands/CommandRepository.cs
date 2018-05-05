@@ -2,6 +2,7 @@
 using SweetGoods.Recipes.Domain.Core.Models;
 using SweetGoods.Recipes.Domain.Interfaces.Commands;
 using System;
+using System.Threading.Tasks;
 
 namespace SweetGoods.Recipes.Infra.Data.Repositories.Commands
 {
@@ -26,9 +27,9 @@ namespace SweetGoods.Recipes.Infra.Data.Repositories.Commands
             GC.SuppressFinalize(this);
         }
 
-        public void Remove(Guid id)
+        public async Task Remove(Guid id)
         {
-            DbSet.Remove(DbSet.Find(id));
+            DbSet.Remove(await DbSet.FirstOrDefaultAsync(x => x.AggregateId == id));
         }
 
         public void Update(TEntity obj)

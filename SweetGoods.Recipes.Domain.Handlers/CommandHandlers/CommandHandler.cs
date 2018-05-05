@@ -1,7 +1,9 @@
 ﻿using MediatR;
 using SweetGoods.Recipes.Domain.Core.Bus;
+using SweetGoods.Recipes.Domain.Core.Commands;
 using SweetGoods.Recipes.Domain.Core.Notifications;
 using SweetGoods.Recipes.Domain.Interfaces;
+using System.Threading.Tasks;
 
 namespace SweetGoods.Recipes.Domain.Handlers.CommandHandlers
 {
@@ -17,6 +19,10 @@ namespace SweetGoods.Recipes.Domain.Handlers.CommandHandlers
             _notifications = (DomainNotificationHandler)notifications;
             _bus = bus;
         }
+
+        protected async Task RaiseDomainError(Command command, string errorMsg) => await _bus.RaiseEvent(command.RaiseError(errorMsg));
+
+        protected async Task RaiseDomainSuccess(Command command, string successMsg) => await _bus.RaiseEvent(command.RaiseSuccess(successMsg));
 
         public bool Commit()
         {
