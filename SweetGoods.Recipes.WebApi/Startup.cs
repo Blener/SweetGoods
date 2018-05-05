@@ -10,6 +10,7 @@ using Microsoft.Extensions.Logging;
 
 using Newtonsoft.Json.Serialization;
 using Swashbuckle.AspNetCore.Swagger;
+using Microsoft.Extensions.PlatformAbstractions;
 
 namespace SweetGoods.Recipes.WebApi
 {
@@ -46,7 +47,12 @@ namespace SweetGoods.Recipes.WebApi
 
             services.AddAutoMapper();
 
-            services.AddSwaggerGen(c => c.SwaggerDoc("v1", new Info { Title = "SweetGoods Recipes API", Version = "v1" }));
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new Info { Title = "SweetGoods Recipes API", Version = "v1" });
+                c.DescribeAllEnumsAsStrings();
+                c.DescribeStringEnumsInCamelCase();
+            });
 
             // .NET Native DI Abstraction
             RegisterServices(services);

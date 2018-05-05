@@ -2,6 +2,8 @@
 using SweetGoods.Recipes.Domain.Interfaces.Queries;
 using SweetGoods.Recipes.Domain.Models.Entities;
 using SweetGoods.Recipes.Infra.Data.Context;
+using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.Threading.Tasks;
 
 namespace SweetGoods.Recipes.Infra.Data.Repositories.Queries

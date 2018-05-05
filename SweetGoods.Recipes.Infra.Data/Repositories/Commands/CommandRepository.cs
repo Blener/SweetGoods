@@ -21,6 +21,11 @@ namespace SweetGoods.Recipes.Infra.Data.Repositories.Commands
             DbSet.AddAsync(obj);
         }
 
+        public void AddRelation<TRelation>(TRelation relation) where TRelation : Entity
+        {
+            Db.Set<TRelation>().Add(relation);
+        }
+
         public void Dispose()
         {
             Db.Dispose();

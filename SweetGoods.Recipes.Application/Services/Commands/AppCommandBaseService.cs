@@ -34,5 +34,9 @@ namespace SweetGoods.Recipes.Application.Services.Commands
         protected void MapAndSendCommand<TCommand>(TViewModel viewModel) where TCommand : Command => bus.SendCommand(mapper.Map<TCommand>(viewModel));
 
         protected void MapAndSendCommand<TCommand>(Guid aggregateId) where TCommand : Command => bus.SendCommand(mapper.Map<TCommand>(aggregateId));
+
+        protected void MapAndSendCommand<TCommand, TMethodViewModel>(TMethodViewModel viewModel)
+            where TCommand : Command where TMethodViewModel : ViewModel
+            => bus.SendCommand(mapper.Map<TCommand>(viewModel));
     }
 }

@@ -15,19 +15,23 @@ namespace SweetGoods.Recipes.Domain.Handlers.CommandHandlers
                                         IAsyncNotificationHandler<AddNewRecipe>,
                                         IAsyncNotificationHandler<UpdateRecipe>,
                                         IAsyncNotificationHandler<DeleteRecipe>,
-                                        IAsyncNotificationHandler<RestoreDeletedRecipe>
+                                        IAsyncNotificationHandler<RestoreDeletedRecipe>,
+                                        IAsyncNotificationHandler<AddCategory>
     {
         private readonly IRecipeCommandRepository recipeCommandRepository;
         private readonly IRecipeQueryRepository recipeQueryRepository;
+        private readonly ICategoryQueryRepository categoryQueryRepository;
 
         public RecipeCommandHandler(IUnitOfWork uow,
                                     IMediatorHandler bus,
                                     INotificationHandler<DomainNotification> notifications,
                                     IRecipeCommandRepository recipeCommandRepository,
-                                    IRecipeQueryRepository recipeQueryRepository) : base(uow, bus, notifications)
+                                    IRecipeQueryRepository recipeQueryRepository,
+                                    ICategoryQueryRepository categoryQueryRepository) : base(uow, bus, notifications)
         {
             this.recipeCommandRepository = recipeCommandRepository;
             this.recipeQueryRepository = recipeQueryRepository;
+            this.categoryQueryRepository = categoryQueryRepository;
         }
 
         public async Task Handle(AddNewRecipe notification)
@@ -95,6 +99,30 @@ namespace SweetGoods.Recipes.Domain.Handlers.CommandHandlers
             if (Commit())
             {
                 await _bus.RaiseEvent(new DeletedRecipeRestored(notification.AggregateId));
+            }
+        }
+
+        public async Task Handle(AddCategory notification)
+        {
+            var recipeId = await recipeQueryRepository.GetIdByAggregateId(notification.AggregateId);
+            if (recipeId == 0)
+            {
+                await RaiseDomainError(notification, "Couldn't find the requested recipe");
+            }
+
+            var categoryId = await categoryQueryRepository.GetIdByAggregateId(notification.CategoryAggregateId);
+            if (categoryId == 0)
+            {
+                await RaiseDomainError(notification, "Couldn't find the requested category");
+            }
+
+            var recipeCategory = new RecipeCategory(recipeId, categoryId);
+
+            recipeCommandRepository.AddRelation(recipeCategory);
+
+            if (Commit())
+            {
+                await _bus.RaiseEvent(new RecipeCategoryAdded(notification.AggregateId, notification.CategoryAggregateId));
             }
         }
     }

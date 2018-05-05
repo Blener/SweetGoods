@@ -7,7 +7,8 @@ namespace SweetGoods.Recipes.Domain.Handlers.EventHandlers
     public class RecipeEventHandler : IAsyncNotificationHandler<NewRecipeAdded>,
                                       IAsyncNotificationHandler<RecipeDeleted>,
                                       IAsyncNotificationHandler<RecipeUpdated>,
-                                      IAsyncNotificationHandler<DeletedRecipeRestored>
+                                      IAsyncNotificationHandler<DeletedRecipeRestored>,
+                                      IAsyncNotificationHandler<RecipeCategoryAdded>
     {
         public async Task Handle(NewRecipeAdded notification)
         {
@@ -22,6 +23,10 @@ namespace SweetGoods.Recipes.Domain.Handlers.EventHandlers
         }
 
         public async Task Handle(DeletedRecipeRestored notification)
+        {
+        }
+
+        public async Task Handle(RecipeCategoryAdded notification)
         {
         }
     }

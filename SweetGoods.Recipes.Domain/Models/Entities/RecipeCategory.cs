@@ -4,10 +4,14 @@ namespace SweetGoods.Recipes.Domain.Models.Entities
 {
     public class RecipeCategory : Entity
     {
-        public RecipeCategory(int recipeId, int categoryId, Recipe recipe, Category category)
+        public RecipeCategory(int recipeId, int categoryId)
         {
             RecipeId = recipeId;
             CategoryId = categoryId;
+        }
+
+        public RecipeCategory(int recipeId, int categoryId, Recipe recipe, Category category) : this(recipeId, categoryId)
+        {
             Recipe = recipe;
             Category = category;
         }

@@ -91,6 +91,7 @@ namespace SweetGoods.Recipes.Infra.CrossCutting.IoC
             services.AddScoped<IAsyncNotificationHandler<DeleteRecipe>, RecipeCommandHandler>();
             services.AddScoped<IAsyncNotificationHandler<RestoreDeletedRecipe>, RecipeCommandHandler>();
             services.AddScoped<IAsyncNotificationHandler<UpdateRecipe>, RecipeCommandHandler>();
+            services.AddScoped<IAsyncNotificationHandler<AddCategory>, RecipeCommandHandler>();
         }
 
         private static void RegisterDomainEvents(IServiceCollection services)
@@ -118,6 +119,7 @@ namespace SweetGoods.Recipes.Infra.CrossCutting.IoC
             services.AddScoped<IAsyncNotificationHandler<RecipeDeleted>, RecipeEventHandler>();
             services.AddScoped<IAsyncNotificationHandler<DeletedRecipeRestored>, RecipeEventHandler>();
             services.AddScoped<IAsyncNotificationHandler<RecipeUpdated>, RecipeEventHandler>();
+            services.AddScoped<IAsyncNotificationHandler<RecipeCategoryAdded>, RecipeEventHandler>();
         }
 
         private static void RegisterInfraServices(IServiceCollection services)

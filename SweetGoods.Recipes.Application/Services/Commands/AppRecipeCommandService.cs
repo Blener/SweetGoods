@@ -15,6 +15,8 @@ namespace SweetGoods.Recipes.Application.Services.Commands
 
         public override void Add(RecipeViewModel viewModel) => MapAndSendCommand<AddNewRecipe>(viewModel);
 
+        public void AddCategory(RecipeCategoryViewModel viewModel) => MapAndSendCommand<AddCategory, RecipeCategoryViewModel>(viewModel);
+
         public override void Remove(Guid aggregateId) => MapAndSendCommand<DeleteRecipe>(aggregateId);
 
         public override void Restore(Guid aggregateId) => MapAndSendCommand<RestoreDeletedRecipe>(aggregateId);
