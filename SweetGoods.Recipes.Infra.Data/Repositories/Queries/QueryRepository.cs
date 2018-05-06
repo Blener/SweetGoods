@@ -32,13 +32,13 @@ namespace SweetGoods.Recipes.Infra.Data.Repositories.Queries
         {
             return DbSet
                 .AsNoTracking()
-                .FirstOrDefaultAsync(x => x.AggregateId == aggregateId);
+                .FirstOrDefaultAsync(x => x.Id == aggregateId);
         }
 
         public Task<bool> ExistAggregateId(Guid aggregateId)
         {
             return DbSet
-                .AnyAsync(x => x.AggregateId == aggregateId);
+                .AnyAsync(x => x.Id == aggregateId);
         }
     }
 }

@@ -12,12 +12,12 @@ namespace SweetGoods.Recipes.Domain.Models.Entities
         }
 
         public Category(
-            int id,
-            Guid aggregateId,
+            int incrementId,
+            Guid id,
             NameValueObject name,
             DescriptionValueObject description,
             int categoryType,
-            bool softDeleted) : this(id, aggregateId, name, description, (CategoryType)categoryType, softDeleted)
+            bool softDeleted) : this(incrementId, id, name, description, (CategoryType)categoryType, softDeleted)
         {
         }
 
@@ -29,8 +29,8 @@ namespace SweetGoods.Recipes.Domain.Models.Entities
             CategoryType categoryType,
             bool softDeleted) : this(name, description, categoryType)
         {
-            Id = id;
-            AggregateId = aggregateId;
+            IncrementId = id;
+            Id = aggregateId;
             SoftDeleted = softDeleted;
         }
 
@@ -52,7 +52,7 @@ namespace SweetGoods.Recipes.Domain.Models.Entities
 
         public override Category GetRestored()
         {
-            return new Category(Id, AggregateId, Name, Description, CategoryType, NotDeleted);
+            return new Category(IncrementId, Id, Name, Description, CategoryType, NotDeleted);
         }
     }
 }

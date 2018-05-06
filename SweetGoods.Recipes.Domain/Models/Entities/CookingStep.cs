@@ -5,10 +5,10 @@ namespace SweetGoods.Recipes.Domain.Models.Entities
 {
     public class CookingStep : Entity
     {
-        public CookingStep(Guid aggregateId, Guid cookingMethodAggregateId, int stepNumber, string stepAction)
+        public CookingStep(Guid id, Guid cookingMethodId, int stepNumber, string stepAction)
         {
-            AggregateId = aggregateId;
-            CookingMethodAggregateId = cookingMethodAggregateId;
+            Id = id;
+            CookingMethodId = cookingMethodId;
             StepNumber = stepNumber;
             StepAction = stepAction;
         }
@@ -17,7 +17,7 @@ namespace SweetGoods.Recipes.Domain.Models.Entities
         {
         }
 
-        public Guid CookingMethodAggregateId { get; private set; }
+        public Guid CookingMethodId { get; private set; }
 
         public int StepNumber { get; private set; }
 

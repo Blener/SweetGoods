@@ -7,44 +7,44 @@ namespace SweetGoods.Recipes.Domain.Models.Entities
     public class CookingMethodIngredient : Entity
     {
         public CookingMethodIngredient(
-            Guid cookingMethodAggregateId,
-            Guid ingredientAggregateId,
-            Guid aggregateId,
+            Guid cookingMethodId,
+            Guid ingredientId,
+            Guid id,
             int measureType,
             decimal measure,
-            string usage) : this(cookingMethodAggregateId, ingredientAggregateId, aggregateId, (MeasureType)measureType, measure, usage)
+            string usage) : this(cookingMethodId, ingredientId, id, (MeasureType)measureType, measure, usage)
         {
         }
 
         public CookingMethodIngredient(
-            Guid cookingMethodAggregateId,
-            Guid ingredientAggregateId,
-            Guid aggregateId,
+            Guid cookingMethodId,
+            Guid ingredientId,
+            Guid id,
             MeasureType measureType,
             decimal measure,
             string usage)
         {
-            CookingMethodAggregateId = cookingMethodAggregateId;
-            IngredientAggregateId = ingredientAggregateId;
-            AggregateId = aggregateId;
+            CookingMethodId = cookingMethodId;
+            IngredientId = ingredientId;
+            Id = id;
             MeasureType = measureType;
             Measure = measure;
             Usage = usage;
         }
 
         public CookingMethodIngredient(
-            Guid cookingMethodAggregateId,
-            Guid ingredientAggregateId,
-            Guid aggregateId,
+            Guid cookingMethodId,
+            Guid ingredientId,
+            Guid id,
             MeasureType measureType,
             decimal measure,
             string usage,
             CookingMethod cookingMethod,
             Ingredient ingredient)
         {
-            CookingMethodAggregateId = cookingMethodAggregateId;
-            IngredientAggregateId = ingredientAggregateId;
-            AggregateId = aggregateId;
+            CookingMethodId = cookingMethodId;
+            IngredientId = ingredientId;
+            Id = id;
             MeasureType = measureType;
             Measure = measure;
             Usage = usage;
@@ -56,9 +56,9 @@ namespace SweetGoods.Recipes.Domain.Models.Entities
         {
         }
 
-        public Guid CookingMethodAggregateId { get; private set; }
+        public Guid CookingMethodId { get; private set; }
 
-        public Guid IngredientAggregateId { get; private set; }
+        public Guid IngredientId { get; private set; }
 
         public MeasureType MeasureType { get; private set; }
 

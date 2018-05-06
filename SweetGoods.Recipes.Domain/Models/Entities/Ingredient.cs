@@ -6,10 +6,10 @@ namespace SweetGoods.Recipes.Domain.Models.Entities
 {
     public class Ingredient : SoftDeleteEntity<Ingredient>
     {
-        public Ingredient(int id, Guid aggregateId, NameValueObject name, string details, bool softDeleted) : this(name, details)
+        public Ingredient(int incrementId, Guid id, NameValueObject name, string details, bool softDeleted) : this(name, details)
         {
+            IncrementId = incrementId;
             Id = id;
-            AggregateId = aggregateId;
             SoftDeleted = softDeleted;
         }
 
@@ -29,7 +29,7 @@ namespace SweetGoods.Recipes.Domain.Models.Entities
 
         public override Ingredient GetRestored()
         {
-            return new Ingredient(Id, AggregateId, Name, Details, NotDeleted);
+            return new Ingredient(IncrementId, Id, Name, Details, NotDeleted);
         }
     }
 }

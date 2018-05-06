@@ -8,7 +8,6 @@ using Microsoft.EntityFrameworkCore.Storage.Internal;
 using SweetGoods.Recipes.Domain.Enums;
 using SweetGoods.Recipes.Infra.Data.Context;
 using System;
-using System.ComponentModel.DataAnnotations.Schema;
 
 namespace SweetGoods.Recipes.Infra.Data.Migrations
 {
@@ -24,13 +23,13 @@ namespace SweetGoods.Recipes.Infra.Data.Migrations
 
             modelBuilder.Entity("SweetGoods.Recipes.Domain.Models.Entities.Category", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("DatabaseGenerated", DatabaseGeneratedOption.Identity);
-
-                    b.Property<Guid>("AggregateId");
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd();
 
                     b.Property<int>("CategoryType");
+
+                    b.Property<int>("IncrementId")
+                        .ValueGeneratedOnAdd();
 
                     b.Property<bool>("SoftDeleted");
 
@@ -41,16 +40,16 @@ namespace SweetGoods.Recipes.Infra.Data.Migrations
 
             modelBuilder.Entity("SweetGoods.Recipes.Domain.Models.Entities.CookingMethod", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("DatabaseGenerated", DatabaseGeneratedOption.Identity);
-
-                    b.Property<Guid>("AggregateId");
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd();
 
                     b.Property<TimeSpan>("CookingTime")
                         .HasColumnType("time(7)");
 
-                    b.Property<int>("RecipeId");
+                    b.Property<int>("IncrementId")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<Guid>("RecipeId");
 
                     b.Property<bool>("SoftDeleted");
 
@@ -63,15 +62,15 @@ namespace SweetGoods.Recipes.Infra.Data.Migrations
 
             modelBuilder.Entity("SweetGoods.Recipes.Domain.Models.Entities.CookingMethodIngredient", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("DatabaseGenerated", DatabaseGeneratedOption.Identity);
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd();
 
-                    b.Property<Guid>("AggregateId");
+                    b.Property<Guid>("CookingMethodId");
 
-                    b.Property<int>("CookingMethodId");
+                    b.Property<int>("IncrementId")
+                        .ValueGeneratedOnAdd();
 
-                    b.Property<int>("IngredientId");
+                    b.Property<Guid>("IngredientId");
 
                     b.Property<decimal>("Measure")
                         .HasColumnType("decimal(18,2)");
@@ -91,15 +90,15 @@ namespace SweetGoods.Recipes.Infra.Data.Migrations
                     b.ToTable("CookingMethodIngredients");
                 });
 
-            modelBuilder.Entity("SweetGoods.Recipes.Domain.Models.Entities.CookingSteps", b =>
+            modelBuilder.Entity("SweetGoods.Recipes.Domain.Models.Entities.CookingStep", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("DatabaseGenerated", DatabaseGeneratedOption.Identity);
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd();
 
-                    b.Property<Guid>("AggregateId");
+                    b.Property<Guid>("CookingMethodId");
 
-                    b.Property<int>("CookingMethodId");
+                    b.Property<int>("IncrementId")
+                        .ValueGeneratedOnAdd();
 
                     b.Property<string>("StepAction")
                         .HasColumnType("nvarchar(500)");
@@ -115,14 +114,14 @@ namespace SweetGoods.Recipes.Infra.Data.Migrations
 
             modelBuilder.Entity("SweetGoods.Recipes.Domain.Models.Entities.Ingredient", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("DatabaseGenerated", DatabaseGeneratedOption.Identity);
-
-                    b.Property<Guid>("AggregateId");
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd();
 
                     b.Property<string>("Details")
                         .HasColumnType("nvarchar(500)");
+
+                    b.Property<int>("IncrementId")
+                        .ValueGeneratedOnAdd();
 
                     b.Property<bool>("SoftDeleted");
 
@@ -133,11 +132,11 @@ namespace SweetGoods.Recipes.Infra.Data.Migrations
 
             modelBuilder.Entity("SweetGoods.Recipes.Domain.Models.Entities.Recipe", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("DatabaseGenerated", DatabaseGeneratedOption.Identity);
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd();
 
-                    b.Property<Guid>("AggregateId");
+                    b.Property<int>("IncrementId")
+                        .ValueGeneratedOnAdd();
 
                     b.Property<bool>("SoftDeleted");
 
@@ -148,15 +147,15 @@ namespace SweetGoods.Recipes.Infra.Data.Migrations
 
             modelBuilder.Entity("SweetGoods.Recipes.Domain.Models.Entities.RecipeCategory", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("DatabaseGenerated", DatabaseGeneratedOption.Identity);
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd();
 
-                    b.Property<Guid>("AggregateId");
+                    b.Property<Guid>("CategoryId");
 
-                    b.Property<int>("CategoryId");
+                    b.Property<int>("IncrementId")
+                        .ValueGeneratedOnAdd();
 
-                    b.Property<int>("RecipeId");
+                    b.Property<Guid>("RecipeId");
 
                     b.HasKey("Id");
 
@@ -171,7 +170,7 @@ namespace SweetGoods.Recipes.Infra.Data.Migrations
                 {
                     b.OwnsOne("SweetGoods.Recipes.Domain.Models.ValueObjects.DescriptionValueObject", "Description", b1 =>
                         {
-                            b1.Property<int>("CategoryId");
+                            b1.Property<Guid>("CategoryId");
 
                             b1.Property<string>("Description")
                                 .HasColumnName("Description")
@@ -188,7 +187,7 @@ namespace SweetGoods.Recipes.Infra.Data.Migrations
 
                     b.OwnsOne("SweetGoods.Recipes.Domain.Models.ValueObjects.NameValueObject", "Name", b1 =>
                         {
-                            b1.Property<int>("CategoryId");
+                            b1.Property<Guid>("CategoryId");
 
                             b1.Property<string>("Name")
                                 .HasColumnName("Name")
@@ -213,7 +212,7 @@ namespace SweetGoods.Recipes.Infra.Data.Migrations
 
                     b.OwnsOne("SweetGoods.Recipes.Domain.Models.ValueObjects.DescriptionValueObject", "Description", b1 =>
                         {
-                            b1.Property<int?>("CookingMethodId");
+                            b1.Property<Guid?>("CookingMethodId");
 
                             b1.Property<string>("Description")
                                 .HasColumnName("Description")
@@ -242,7 +241,7 @@ namespace SweetGoods.Recipes.Infra.Data.Migrations
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
-            modelBuilder.Entity("SweetGoods.Recipes.Domain.Models.Entities.CookingSteps", b =>
+            modelBuilder.Entity("SweetGoods.Recipes.Domain.Models.Entities.CookingStep", b =>
                 {
                     b.HasOne("SweetGoods.Recipes.Domain.Models.Entities.CookingMethod")
                         .WithMany("Steps")
@@ -254,7 +253,7 @@ namespace SweetGoods.Recipes.Infra.Data.Migrations
                 {
                     b.OwnsOne("SweetGoods.Recipes.Domain.Models.ValueObjects.NameValueObject", "Name", b1 =>
                         {
-                            b1.Property<int?>("IngredientId");
+                            b1.Property<Guid?>("IngredientId");
 
                             b1.Property<string>("Name")
                                 .HasColumnName("Name")
@@ -274,7 +273,7 @@ namespace SweetGoods.Recipes.Infra.Data.Migrations
                 {
                     b.OwnsOne("SweetGoods.Recipes.Domain.Models.ValueObjects.DescriptionValueObject", "Description", b1 =>
                         {
-                            b1.Property<int?>("RecipeId");
+                            b1.Property<Guid?>("RecipeId");
 
                             b1.Property<string>("Description")
                                 .HasColumnName("Description")
@@ -291,7 +290,7 @@ namespace SweetGoods.Recipes.Infra.Data.Migrations
 
                     b.OwnsOne("SweetGoods.Recipes.Domain.Models.ValueObjects.NameValueObject", "Name", b1 =>
                         {
-                            b1.Property<int?>("RecipeId");
+                            b1.Property<Guid?>("RecipeId");
 
                             b1.Property<string>("Name")
                                 .HasColumnName("Name")

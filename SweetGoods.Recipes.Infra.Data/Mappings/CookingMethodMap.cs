@@ -16,9 +16,9 @@ namespace SweetGoods.Recipes.Infra.Data.Mappings
                 .HasColumnType("nvarchar(500)")
                 .HasMaxLength(500);
 
-            builder.HasMany(x => x.Ingredients).WithOne(x => x.CookingMethod);
+            builder.HasMany(x => x.Ingredients).WithOne(x => x.CookingMethod).HasForeignKey(x => x.CookingMethodId);
 
-            builder.HasMany(x => x.Steps).WithOne().HasForeignKey(x => x.CookingMethodAggregateId);
+            builder.HasMany(x => x.Steps).WithOne().HasForeignKey(x => x.CookingMethodId);
 
             builder.HasOne(x => x.Recipe).WithMany(x => x.CookingMethods);
 

@@ -5,6 +5,14 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Migrations\20180505155126_InitialBaseSetup.cs" />
+    <Compile Remove="Migrations\20180506165638_ChangesMVP_1.cs" />
+    <Compile Remove="Migrations\20180506171326_Changes-MVP-1.cs" />
+    <Compile Remove="Migrations\20180506172042_Changes-MVP-1.cs" />
+    <Compile Remove="Migrations\20180506172538_InitialBaseSetup.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="2.0.2" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="2.0.2" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="2.0.2" />

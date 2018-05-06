@@ -34,7 +34,7 @@ namespace SweetGoods.Recipes.Infra.Data.Repositories.Commands
 
         public async Task Remove(Guid id)
         {
-            DbSet.Remove(await DbSet.FirstOrDefaultAsync(x => x.AggregateId == id));
+            DbSet.Remove(await DbSet.FirstOrDefaultAsync(x => x.Id == id));
         }
 
         public void Update(TEntity obj)

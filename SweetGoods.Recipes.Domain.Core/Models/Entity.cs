@@ -4,9 +4,9 @@ namespace SweetGoods.Recipes.Domain.Core.Models
 {
     public abstract class Entity
     {
-        public int Id { get; protected set; }
+        public int IncrementId { get; protected set; }
 
-        public Guid AggregateId { get; protected set; }
+        public Guid Id { get; protected set; }
 
         public override bool Equals(object obj)
         {
@@ -15,7 +15,7 @@ namespace SweetGoods.Recipes.Domain.Core.Models
             if (ReferenceEquals(this, compareTo)) return true;
             if (ReferenceEquals(null, compareTo)) return false;
 
-            return Id.Equals(compareTo.Id);
+            return IncrementId.Equals(compareTo.IncrementId);
         }
 
         public static bool operator ==(Entity a, Entity b)
@@ -36,12 +36,12 @@ namespace SweetGoods.Recipes.Domain.Core.Models
 
         public override int GetHashCode()
         {
-            return (GetType().GetHashCode() * 834) + Id.GetHashCode();
+            return (GetType().GetHashCode() * 834) + IncrementId.GetHashCode();
         }
 
         public override string ToString()
         {
-            return GetType().Name + " [Id=" + Id + "]";
+            return GetType().Name + " [Id=" + IncrementId + "]";
         }
     }
 }

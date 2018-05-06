@@ -23,9 +23,9 @@ namespace SweetGoods.Recipes.Infra.Data.Mappings
                 .HasColumnType("nvarchar(500)")
                 .HasMaxLength(500);
 
-            builder.HasMany(x => x.RecipeCategories).WithOne(x => x.Recipe);
+            builder.HasMany(x => x.RecipeCategories).WithOne(x => x.Recipe).HasForeignKey(x => x.RecipeId);
 
-            builder.HasMany(x => x.CookingMethods).WithOne(x => x.Recipe);
+            builder.HasMany(x => x.CookingMethods).WithOne(x => x.Recipe).HasForeignKey(x => x.RecipeId);
         }
     }
 }

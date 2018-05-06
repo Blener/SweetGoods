@@ -39,7 +39,7 @@ namespace SweetGoods.Recipes.Domain.Handlers.CommandHandlers
 
             if (Commit())
             {
-                await _bus.RaiseEvent(new NewIngredientAdded(ingredient.AggregateId, ingredient.Name, ingredient.Details));
+                await _bus.RaiseEvent(new NewIngredientAdded(ingredient.Id, ingredient.Name, ingredient.Details));
             }
         }
 
@@ -53,13 +53,13 @@ namespace SweetGoods.Recipes.Domain.Handlers.CommandHandlers
                 return;
             }
 
-            var ingredient = new Ingredient(ingredientDb.Id, ingredientDb.AggregateId, notification.Name, notification.Details, ingredientDb.SoftDeleted);
+            var ingredient = new Ingredient(ingredientDb.IncrementId, ingredientDb.Id, notification.Name, notification.Details, ingredientDb.SoftDeleted);
 
             ingredientCommandRepository.Update(ingredient);
 
             if (Commit())
             {
-                await _bus.RaiseEvent(new IngredientUpdated(ingredient.AggregateId, ingredient.Name, ingredient.Details));
+                await _bus.RaiseEvent(new IngredientUpdated(ingredient.Id, ingredient.Name, ingredient.Details));
             }
         }
 

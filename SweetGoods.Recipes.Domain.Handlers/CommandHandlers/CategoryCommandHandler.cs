@@ -44,7 +44,7 @@ namespace SweetGoods.Recipes.Domain.Handlers.CommandHandlers
 
             if (Commit())
             {
-                await _bus.RaiseEvent(new NewCategoryAdded(category.AggregateId, category.Name, category.Description, category.CategoryType));
+                await _bus.RaiseEvent(new NewCategoryAdded(category.Id, category.Name, category.Description, category.CategoryType));
             }
         }
 
@@ -58,13 +58,13 @@ namespace SweetGoods.Recipes.Domain.Handlers.CommandHandlers
                 return;
             }
 
-            var category = new Category(categoryDb.Id, categoryDb.AggregateId, notification.Name, notification.Description, notification.CategoryType, categoryDb.SoftDeleted);
+            var category = new Category(categoryDb.IncrementId, categoryDb.Id, notification.Name, notification.Description, notification.CategoryType, categoryDb.SoftDeleted);
 
             categoryCommandRepository.Update(category);
 
             if (Commit())
             {
-                await _bus.RaiseEvent(new CategoryUpdated(category.AggregateId, category.Name, category.Description, category.CategoryType));
+                await _bus.RaiseEvent(new CategoryUpdated(category.Id, category.Name, category.Description, category.CategoryType));
             }
         }
 

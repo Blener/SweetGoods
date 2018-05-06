@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using System;
+using System.Collections.Generic;
 
 namespace SweetGoods.Recipes.Infra.Data.Migrations
 {
@@ -12,10 +13,10 @@ namespace SweetGoods.Recipes.Infra.Data.Migrations
                 name: "Categories",
                 columns: table => new
                 {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    AggregateId = table.Column<Guid>(nullable: false),
+                    Id = table.Column<Guid>(nullable: false),
                     CategoryType = table.Column<int>(nullable: false),
+                    IncrementId = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     SoftDeleted = table.Column<bool>(nullable: false),
                     Description = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: true),
                     Name = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: true)
@@ -29,10 +30,10 @@ namespace SweetGoods.Recipes.Infra.Data.Migrations
                 name: "Ingredients",
                 columns: table => new
                 {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    AggregateId = table.Column<Guid>(nullable: false),
+                    Id = table.Column<Guid>(nullable: false),
                     Details = table.Column<string>(type: "nvarchar(500)", nullable: true),
+                    IncrementId = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     SoftDeleted = table.Column<bool>(nullable: false),
                     Name = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: true)
                 },
@@ -45,9 +46,9 @@ namespace SweetGoods.Recipes.Infra.Data.Migrations
                 name: "Recipes",
                 columns: table => new
                 {
-                    Id = table.Column<int>(nullable: false)
+                    Id = table.Column<Guid>(nullable: false),
+                    IncrementId = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    AggregateId = table.Column<Guid>(nullable: false),
                     SoftDeleted = table.Column<bool>(nullable: false),
                     Description = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: true),
                     Name = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: true)
@@ -61,11 +62,11 @@ namespace SweetGoods.Recipes.Infra.Data.Migrations
                 name: "CookingMethods",
                 columns: table => new
                 {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    AggregateId = table.Column<Guid>(nullable: false),
+                    Id = table.Column<Guid>(nullable: false),
                     CookingTime = table.Column<TimeSpan>(type: "time(7)", nullable: false),
-                    RecipeId = table.Column<int>(nullable: false),
+                    IncrementId = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    RecipeId = table.Column<Guid>(nullable: false),
                     SoftDeleted = table.Column<bool>(nullable: false),
                     Description = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: true)
                 },
@@ -84,11 +85,11 @@ namespace SweetGoods.Recipes.Infra.Data.Migrations
                 name: "RecipeCategories",
                 columns: table => new
                 {
-                    Id = table.Column<int>(nullable: false)
+                    Id = table.Column<Guid>(nullable: false),
+                    CategoryId = table.Column<Guid>(nullable: false),
+                    IncrementId = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    AggregateId = table.Column<Guid>(nullable: false),
-                    CategoryId = table.Column<int>(nullable: false),
-                    RecipeId = table.Column<int>(nullable: false)
+                    RecipeId = table.Column<Guid>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -111,11 +112,11 @@ namespace SweetGoods.Recipes.Infra.Data.Migrations
                 name: "CookingMethodIngredients",
                 columns: table => new
                 {
-                    Id = table.Column<int>(nullable: false)
+                    Id = table.Column<Guid>(nullable: false),
+                    CookingMethodId = table.Column<Guid>(nullable: false),
+                    IncrementId = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    AggregateId = table.Column<Guid>(nullable: false),
-                    CookingMethodId = table.Column<int>(nullable: false),
-                    IngredientId = table.Column<int>(nullable: false),
+                    IngredientId = table.Column<Guid>(nullable: false),
                     Measure = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     MeasureType = table.Column<int>(type: "int", nullable: false),
                     Usage = table.Column<string>(type: "nvarchar(500)", nullable: true)
@@ -141,10 +142,10 @@ namespace SweetGoods.Recipes.Infra.Data.Migrations
                 name: "CookingSteps",
                 columns: table => new
                 {
-                    Id = table.Column<int>(nullable: false)
+                    Id = table.Column<Guid>(nullable: false),
+                    CookingMethodId = table.Column<Guid>(nullable: false),
+                    IncrementId = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    AggregateId = table.Column<Guid>(nullable: false),
-                    CookingMethodId = table.Column<int>(nullable: false),
                     StepAction = table.Column<string>(type: "nvarchar(500)", nullable: true),
                     StepNumber = table.Column<int>(nullable: false)
                 },

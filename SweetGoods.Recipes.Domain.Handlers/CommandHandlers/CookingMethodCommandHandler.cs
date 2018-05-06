@@ -46,7 +46,7 @@ namespace SweetGoods.Recipes.Domain.Handlers.CommandHandlers
 
             if (Commit())
             {
-                await _bus.RaiseEvent(new NewCookingMethodAdded(cookingMethod.AggregateId, cookingMethod.CookingTime, cookingMethod.Description));
+                await _bus.RaiseEvent(new NewCookingMethodAdded(cookingMethod.Id, cookingMethod.CookingTime, cookingMethod.Description));
             }
         }
 
@@ -60,13 +60,13 @@ namespace SweetGoods.Recipes.Domain.Handlers.CommandHandlers
                 return;
             }
 
-            var cookingMethod = new CookingMethod(cookingMethodDb.Id, cookingMethodDb.AggregateId, cookingMethodDb.RecipeAggregateId, notification.CookingTime, notification.Description, cookingMethodDb.SoftDeleted);
+            var cookingMethod = new CookingMethod(cookingMethodDb.IncrementId, cookingMethodDb.Id, cookingMethodDb.RecipeId, notification.CookingTime, notification.Description, cookingMethodDb.SoftDeleted);
 
             cookingMethodCommandRepository.Update(cookingMethod);
 
             if (Commit())
             {
-                await _bus.RaiseEvent(new CookingMethodUpdated(cookingMethod.AggregateId, cookingMethod.CookingTime, cookingMethod.Description));
+                await _bus.RaiseEvent(new CookingMethodUpdated(cookingMethod.Id, cookingMethod.CookingTime, cookingMethod.Description));
             }
         }
 

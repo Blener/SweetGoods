@@ -5,14 +5,14 @@ namespace SweetGoods.Recipes.Domain.Models.Entities
 {
     public class RecipeCategory : Entity
     {
-        public RecipeCategory(Guid recipeAggregateId, Guid categoryAggregateId, Guid aggregateId)
+        public RecipeCategory(Guid recipeId, Guid categoryId, Guid id)
         {
-            RecipeAggregateId = recipeAggregateId;
-            CategoryAggregateId = categoryAggregateId;
-            AggregateId = aggregateId;
+            RecipeId = recipeId;
+            CategoryId = categoryId;
+            Id = id;
         }
 
-        public RecipeCategory(Guid recipeAggregateId, Guid categoryAggregateId, Guid aggregateId, Recipe recipe, Category category) : this(recipeAggregateId, categoryAggregateId, aggregateId)
+        public RecipeCategory(Guid recipeId, Guid categoryId, Guid id, Recipe recipe, Category category) : this(recipeId, categoryId, id)
         {
             Recipe = recipe;
             Category = category;
@@ -22,9 +22,9 @@ namespace SweetGoods.Recipes.Domain.Models.Entities
         {
         }
 
-        public Guid RecipeAggregateId { get; private set; }
+        public Guid RecipeId { get; private set; }
 
-        public Guid CategoryAggregateId { get; private set; }
+        public Guid CategoryId { get; private set; }
 
         public virtual Recipe Recipe { get; private set; }
 

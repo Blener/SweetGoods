@@ -11,10 +11,10 @@ namespace SweetGoods.Recipes.Domain.Models.Entities
         {
         }
 
-        public Recipe(int id, Guid aggregateId, NameValueObject name, DescriptionValueObject description, bool softDeleted) : this(name, description)
+        public Recipe(int incrementd, Guid id, NameValueObject name, DescriptionValueObject description, bool softDeleted) : this(name, description)
         {
+            IncrementId = incrementd;
             Id = id;
-            AggregateId = aggregateId;
             SoftDeleted = softDeleted;
         }
 
@@ -46,7 +46,7 @@ namespace SweetGoods.Recipes.Domain.Models.Entities
 
         public override Recipe GetRestored()
         {
-            return new Recipe(Id, AggregateId, Name, Description, NotDeleted);
+            return new Recipe(IncrementId, Id, Name, Description, NotDeleted);
         }
     }
 }

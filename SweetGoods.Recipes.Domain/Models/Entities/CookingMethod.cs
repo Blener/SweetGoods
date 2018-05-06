@@ -9,25 +9,25 @@ namespace SweetGoods.Recipes.Domain.Models.Entities
     public class CookingMethod : SoftDeleteEntity<CookingMethod>
     {
         public CookingMethod(
-            int id,
-            Guid aggregateId,
-            Guid recipeAggregateId,
+            int incrementId,
+            Guid id,
+            Guid recipeId,
             TimeSpan cookingTime,
             DescriptionValueObject description,
-            bool softDeleted) : this(recipeAggregateId, cookingTime, description)
+            bool softDeleted) : this(recipeId, cookingTime, description)
         {
+            IncrementId = incrementId;
             Id = id;
-            AggregateId = aggregateId;
             SoftDeleted = softDeleted;
         }
 
         public CookingMethod(
-            Guid recipeAggregateId,
+            Guid recipeId,
             TimeSpan cookingTime,
             DescriptionValueObject description,
             Recipe recipe,
             ICollection<CookingMethodIngredient> ingredients,
-            ICollection<CookingStep> steps) : this(recipeAggregateId, cookingTime, description)
+            ICollection<CookingStep> steps) : this(recipeId, cookingTime, description)
         {
             Recipe = recipe;
             Ingredients = ingredients;
@@ -35,11 +35,11 @@ namespace SweetGoods.Recipes.Domain.Models.Entities
         }
 
         public CookingMethod(
-            Guid recipeAggregateId,
+            Guid recipeId,
             TimeSpan cookingTime,
             DescriptionValueObject description)
         {
-            RecipeAggregateId = recipeAggregateId;
+            RecipeId = recipeId;
             CookingTime = cookingTime;
             Description = description;
             Ingredients = new HashSet<CookingMethodIngredient>();
@@ -50,13 +50,12 @@ namespace SweetGoods.Recipes.Domain.Models.Entities
         {
         }
 
-        public Guid RecipeAggregateId { get; private set; }
+        public Guid RecipeId { get; private set; }
 
         public TimeSpan CookingTime { get; private set; }
 
         public DescriptionValueObject Description { get; private set; }
 
-        [ForeignKey(nameof(RecipeAggregateId))]
         public virtual Recipe Recipe { get; private set; }
 
         public virtual ICollection<CookingMethodIngredient> Ingredients { get; private set; }
@@ -65,7 +64,7 @@ namespace SweetGoods.Recipes.Domain.Models.Entities
 
         public override CookingMethod GetRestored()
         {
-            return new CookingMethod(Id, AggregateId, RecipeAggregateId, CookingTime, Description, NotDeleted);
+            return new CookingMethod(IncrementId, Id, RecipeId, CookingTime, Description, NotDeleted);
         }
     }
 }
