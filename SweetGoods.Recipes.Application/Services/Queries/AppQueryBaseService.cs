@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace SweetGoods.Recipes.Application.Services.Queries
 {
-    public abstract class AppQueryBaseService<TEntity, TViewModel> : IAppBaseQueryService<TViewModel> where TEntity : Entity where TViewModel : ViewModel
+    public abstract class AppQueryBaseService<TEntity, TViewModel> : IAppBaseQueryService<TViewModel> where TEntity : Entity where TViewModel : BaseViewModel
     {
         protected readonly IQueryRepository<TEntity> queryRepository;
         protected readonly IMapper mapper;

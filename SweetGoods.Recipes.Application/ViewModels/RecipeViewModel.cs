@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace SweetGoods.Recipes.Application.ViewModels
 {
-    public class RecipeViewModel : ViewModel
+    public class RecipeViewModel : BaseViewModel
     {
         public NameValueObject Name { get; set; }
 

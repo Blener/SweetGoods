@@ -3,7 +3,7 @@ using System;
 
 namespace SweetGoods.Recipes.Application.ViewModels
 {
-    public class RecipeCategoryViewModel : ViewModel
+    public class RecipeCategoryViewModel : BaseViewModel
     {
         [JsonProperty("RecipeId")]
         public Guid RecipeAggregateId { get; set; }

@@ -11,7 +11,7 @@ using SweetGoods.Recipes.Domain.Core.Notifications;
 
 namespace SweetGoods.Recipes.WebApi.Controllers
 {
-    public abstract class BaseMethodsController<TViewModel> : BaseApiController where TViewModel : ViewModel
+    public abstract class BaseMethodsController<TViewModel> : BaseApiController where TViewModel : BaseViewModel
     {
         protected readonly IAppBaseCommandService<TViewModel> baseCommandService;
         protected readonly IAppBaseQueryService<TViewModel> baseQueryService;
@@ -27,6 +27,10 @@ namespace SweetGoods.Recipes.WebApi.Controllers
             this.baseQueryService = baseQueryService;
         }
 
+        /// <summary>
+        /// Get the requested list of entities
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
         public virtual IActionResult Get()
         {

@@ -9,4 +9,11 @@
     <PackageReference Include="MediatR" Version="3.0.1" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="CoreBases\Application\" />
+    <Folder Include="CoreBases\Domain\" />
+    <Folder Include="CoreBases\Infra\" />
+    <Folder Include="CoreBases\Service\" />
+  </ItemGroup>
+
 </Project>

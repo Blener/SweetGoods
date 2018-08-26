@@ -7,7 +7,7 @@ using System;
 
 namespace SweetGoods.Recipes.Application.Services.Commands
 {
-    public abstract class AppCommandBaseService<TViewModel> : IAppBaseCommandService<TViewModel> where TViewModel : ViewModel
+    public abstract class AppCommandBaseService<TViewModel> : IAppBaseCommandService<TViewModel> where TViewModel : BaseViewModel
     {
         private readonly IMediatorHandler bus;
         private readonly IMapper mapper;
@@ -36,7 +36,7 @@ namespace SweetGoods.Recipes.Application.Services.Commands
         protected void MapAndSendCommand<TCommand>(Guid aggregateId) where TCommand : Command => bus.SendCommand(mapper.Map<TCommand>(aggregateId));
 
         protected void MapAndSendCommand<TCommand, TMethodViewModel>(TMethodViewModel viewModel)
-            where TCommand : Command where TMethodViewModel : ViewModel
+            where TCommand : Command where TMethodViewModel : BaseViewModel
             => bus.SendCommand(mapper.Map<TCommand>(viewModel));
     }
 }

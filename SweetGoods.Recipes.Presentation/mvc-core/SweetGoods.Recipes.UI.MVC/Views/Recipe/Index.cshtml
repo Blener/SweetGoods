@@ -1,0 +1,15 @@
+﻿@model SweetGoods.Recipes.UI.MVC.ViewModels.ReceitaViewModel
+
+@{
+    ViewData["Title"] = "Receitas";
+}
+
+<h2>Receitas</h2>
+
+<form asp-controller="Ingredient" asp-action="Cadastro" data-ajax="true" data-ajax-method="post">
+    <form-default>
+        @await Html.PartialAsync("_IdENome")
+        <label>Descrição</label>
+        <input type="text" asp-for="@Model.Descrição" class="form-input" />
+    </form-default>
+</form>

@@ -4,7 +4,7 @@ using System;
 
 namespace SweetGoods.Recipes.Application.ViewModels
 {
-    public class CookingMethodIngredientViewModel : ViewModel
+    public class CookingMethodIngredientViewModel : BaseViewModel
     {
         [JsonProperty("CookingMethodId")]
         public Guid CookingMethodAggregateId { get; set; }

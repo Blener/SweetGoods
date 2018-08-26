@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace SweetGoods.Recipes.Application.ViewModels
 {
-    public class CookingMethodViewModel : ViewModel
+    public class CookingMethodViewModel : BaseViewModel
     {
         [JsonProperty("RecipeId")]
         public Guid RecipeAggregateId { get; set; }

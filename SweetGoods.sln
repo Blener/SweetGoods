@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27130.2003
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SweetGoods.Recipes.Domain.Core", "SweetGoods.Recipes.Domain.Core\SweetGoods.Recipes.Domain.Core.csproj", "{880B8FA7-6923-46D6-A3BA-35A2189445CC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SweetGoods.Recipes.Domain.Core", "SweetGoods.Recipes.Domain.Core\SweetGoods.Recipes.Domain.Core.csproj", "{880B8FA7-6923-46D6-A3BA-35A2189445CC}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "1 - Presentation", "1 - Presentation", "{8C5409D1-B2AF-4E27-8564-29DF89785A71}"
 EndProject
@@ -15,23 +15,25 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "4 - Domain", "4 - Domain", 
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "5 - Infra", "5 - Infra", "{16CFE2A6-0B9B-48D7-911A-91B3D85369A8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SweetGoods.Recipes.Domain", "SweetGoods.Recipes.Domain\SweetGoods.Recipes.Domain.csproj", "{F9C01D79-F1E5-4894-8BA6-91FF9EE9FE22}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SweetGoods.Recipes.Domain", "SweetGoods.Recipes.Domain\SweetGoods.Recipes.Domain.csproj", "{F9C01D79-F1E5-4894-8BA6-91FF9EE9FE22}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "5.1 - Data", "5.1 - Data", "{44AA0267-71FD-46E7-A8B4-16BE69491401}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "5.2 - CrossCutting", "5.2 - CrossCutting", "{46C97F3D-C199-44C4-914A-ED76DC44B847}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SweetGoods.Recipes.Infra.Data", "SweetGoods.Recipes.Infra.Data\SweetGoods.Recipes.Infra.Data.csproj", "{8D1AAF1D-A0FE-44C9-A584-7FFF6C81D91B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SweetGoods.Recipes.Infra.Data", "SweetGoods.Recipes.Infra.Data\SweetGoods.Recipes.Infra.Data.csproj", "{8D1AAF1D-A0FE-44C9-A584-7FFF6C81D91B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SweetGoods.Recipes.Infra.CrossCutting.Bus", "SweetGoods.Recipes.Infra.CrossCutting.Bus\SweetGoods.Recipes.Infra.CrossCutting.Bus.csproj", "{1C08A1B7-6A72-429F-B9AF-F30C7DF1D289}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SweetGoods.Recipes.Infra.CrossCutting.Bus", "SweetGoods.Recipes.Infra.CrossCutting.Bus\SweetGoods.Recipes.Infra.CrossCutting.Bus.csproj", "{1C08A1B7-6A72-429F-B9AF-F30C7DF1D289}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SweetGoods.Recipes.Infra.CrossCutting.IoC", "SweetGoods.Recipes.Infra.CrossCutting.IoC\SweetGoods.Recipes.Infra.CrossCutting.IoC.csproj", "{C62975DE-51B0-4421-B479-EBED5CCBCE32}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SweetGoods.Recipes.Infra.CrossCutting.IoC", "SweetGoods.Recipes.Infra.CrossCutting.IoC\SweetGoods.Recipes.Infra.CrossCutting.IoC.csproj", "{C62975DE-51B0-4421-B479-EBED5CCBCE32}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SweetGoods.Recipes.Domain.Handlers", "SweetGoods.Recipes.Domain.Handlers\SweetGoods.Recipes.Domain.Handlers.csproj", "{537F761E-41EC-4935-B1EE-7DC1D28E0362}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SweetGoods.Recipes.Domain.Handlers", "SweetGoods.Recipes.Domain.Handlers\SweetGoods.Recipes.Domain.Handlers.csproj", "{537F761E-41EC-4935-B1EE-7DC1D28E0362}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SweetGoods.Recipes.Application", "SweetGoods.Recipes.Application\SweetGoods.Recipes.Application.csproj", "{A9F2A616-9819-4A8D-86A5-0ECA0AC276CD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SweetGoods.Recipes.Application", "SweetGoods.Recipes.Application\SweetGoods.Recipes.Application.csproj", "{A9F2A616-9819-4A8D-86A5-0ECA0AC276CD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SweetGoods.Recipes.WebApi", "SweetGoods.Recipes.WebApi\SweetGoods.Recipes.WebApi.csproj", "{BDB3CE20-946B-4F4D-AF57-EF6EC813A336}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SweetGoods.Recipes.WebApi", "SweetGoods.Recipes.WebApi\SweetGoods.Recipes.WebApi.csproj", "{BDB3CE20-946B-4F4D-AF57-EF6EC813A336}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SweetGoods.Recipes.UI.MVC", "SweetGoods.Recipes.Presentation\mvc-core\SweetGoods.Recipes.UI.MVC\SweetGoods.Recipes.UI.MVC.csproj", "{2A3529BC-2597-4823-A09C-2386BCF57C1B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -71,6 +73,10 @@ Global
 		{BDB3CE20-946B-4F4D-AF57-EF6EC813A336}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BDB3CE20-946B-4F4D-AF57-EF6EC813A336}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BDB3CE20-946B-4F4D-AF57-EF6EC813A336}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2A3529BC-2597-4823-A09C-2386BCF57C1B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2A3529BC-2597-4823-A09C-2386BCF57C1B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2A3529BC-2597-4823-A09C-2386BCF57C1B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2A3529BC-2597-4823-A09C-2386BCF57C1B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -86,6 +92,7 @@ Global
 		{537F761E-41EC-4935-B1EE-7DC1D28E0362} = {6C2B44CE-A53F-49EE-B835-7CB77EA335B7}
 		{A9F2A616-9819-4A8D-86A5-0ECA0AC276CD} = {B6B22FEC-B561-43F0-9A9E-DE38F35B732B}
 		{BDB3CE20-946B-4F4D-AF57-EF6EC813A336} = {4CBE740A-08AC-4D0C-B5A6-C73CECA9077D}
+		{2A3529BC-2597-4823-A09C-2386BCF57C1B} = {8C5409D1-B2AF-4E27-8564-29DF89785A71}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {7326F987-2EAE-438B-807F-ECDF2AB66F8F}

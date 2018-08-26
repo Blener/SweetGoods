@@ -1,0 +1,2 @@
+﻿$("#btnSalvarReceita").click(function () {
+});

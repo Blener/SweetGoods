@@ -3,7 +3,7 @@ using SweetGoods.Recipes.Domain.Models.ValueObjects;
 
 namespace SweetGoods.Recipes.Application.ViewModels
 {
-    public class CategoryViewModel : ViewModel
+    public class CategoryViewModel : BaseViewModel
     {
         public NameValueObject Name { get; set; }
 

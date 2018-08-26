@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace SweetGoods.Recipes.Application.ViewModels
 {
-    public abstract class ViewModel
+    public abstract class BaseViewModel
     {
         [Required]
         [JsonProperty("id")]

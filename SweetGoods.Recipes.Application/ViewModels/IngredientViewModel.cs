@@ -2,7 +2,7 @@
 
 namespace SweetGoods.Recipes.Application.ViewModels
 {
-    public class IngredientViewModel : ViewModel
+    public class IngredientViewModel : BaseViewModel
     {
         public NameValueObject Name { get; set; }
 

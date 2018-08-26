@@ -3,7 +3,7 @@ using System;
 
 namespace SweetGoods.Recipes.Application.Interfaces.Commands
 {
-    public interface IAppBaseCommandService<TViewModel> : IDisposable where TViewModel : ViewModel
+    public interface IAppBaseCommandService<TViewModel> : IDisposable where TViewModel : BaseViewModel
     {
         void Add(TViewModel viewModel);
 
