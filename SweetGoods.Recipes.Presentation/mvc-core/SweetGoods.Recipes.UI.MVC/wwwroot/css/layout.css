@@ -1,0 +1,22 @@
+﻿.bg-main {
+    background-color: #307F5E;
+}
+
+a {
+    color: #FFF;
+}
+
+.card {
+    border: none;
+}
+
+.card-img-overlay {
+    background-color: #000;
+    opacity: 0.7;
+}
+
+.card-img-top {
+    width: 100%;
+    height: 25vw;
+    object-fit: cover;
+}
