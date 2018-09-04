@@ -1,6 +1,6 @@
 {
   "version": "1.0.0",
-  "name": "project-name",
+  "name": "sweet-goods",
   "private": true,
   "dependencies": {
     "bootstrap": "4.1.3",
