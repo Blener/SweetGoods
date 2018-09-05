@@ -15,20 +15,21 @@
                     <nav class="d-flex align-items-start bg-main">
                         <ul class="nav nav-pills nav-fill">
                             <li class="nav-item">
-                                <a class="nav-link active" href="#">Início</a>
+                                <a class="nav-link active" asp-controller="Home" asp-action="Index">Início</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="#">Receitas</a>
+                                <a class="nav-link" asp-controller="Recipe" asp-action="Index">Receitas</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="#">Ingredientes</a>
+                                <a class="nav-link" asp-controller="Ingredient" asp-action="Index">Ingredientes</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="#">Categorias</a>
+                                <a class="nav-link" asp-controller="Category" asp-action="Index">Categorias</a>
                             </li>
                         </ul>
                     </nav>
                 </div>
+                <autocomplete placeholder="Digite para pesquisar" url="@ViewContext.ActionDescriptor.RouteValues["Controller"]"></autocomplete>
                 @RenderBody()
             </div>
         </div>

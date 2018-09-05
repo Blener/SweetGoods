@@ -6,8 +6,18 @@ a {
     color: #FFF;
 }
 
+    a:hover {
+        color: #5BFF7D;
+    }
+
+.nav-pills .nav-link.active, .nav-pills .show > .nav-link {
+    background-color: #5BFF7D;
+    color: #000;
+}
+
 .card {
     border: none;
+    width: 18rem;
 }
 
 .card-img-overlay {
