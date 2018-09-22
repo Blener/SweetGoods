@@ -1,15 +1,16 @@
-﻿using SweetGoods.Recipes.Application.Interfaces.Commands;
+﻿using AutoMapper;
+using GiftBagOfBases.Interfaces.Domain;
+using GiftBagOfBases.Services.Application;
+using SweetGoods.Recipes.Application.Interfaces;
 using SweetGoods.Recipes.Application.ViewModels;
-using System;
-using SweetGoods.Recipes.Domain.Core.Bus;
-using AutoMapper;
 using SweetGoods.Recipes.Domain.Commands.Category;
+using System;
 
-namespace SweetGoods.Recipes.Application.Services.Commands
+namespace SweetGoods.Recipes.Application.Services
 {
-    public class AppCategoryCommandService : AppCommandBaseService<CategoryViewModel>, IAppCategoryCommandService
+    public class AppCategoryService : AppFullService<CategoryViewModel>, IAppCategoryService
     {
-        public AppCategoryCommandService(IMediatorHandler bus, IMapper mapper) : base(bus, mapper)
+        public AppCategoryService(IMediatorHandler bus, IMapper mapper, IAppCategoryService appCategoryService) : base(bus, mapper, appCategoryService)
         {
         }
 

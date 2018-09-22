@@ -1,19 +1,20 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using SweetGoods.Recipes.Application.ViewModels;
+﻿using GiftBagOfBases.Controllers;
+using GiftBagOfBases.Notifications;
 using MediatR;
-using SweetGoods.Recipes.Domain.Core.Notifications;
-using SweetGoods.Recipes.Application.Interfaces.Commands;
-using SweetGoods.Recipes.Application.Interfaces.Queries;
+using Microsoft.AspNetCore.Mvc;
+using SweetGoods.Recipes.Application.Interfaces;
+using SweetGoods.Recipes.Application.ViewModels;
 
 namespace SweetGoods.Recipes.WebApi.Controllers
 {
     [Route("Recipe")]
-    public class RecipeController : BaseMethodsController<RecipeViewModel>
+    public class RecipeController : GiftFullController<RecipeViewModel>
     {
-        protected RecipeController(
+        private IAppRecipeService appRecipeService => appFullService as IAppRecipeService;
+
+        public RecipeController(
             INotificationHandler<DomainNotification> notifications,
-            IAppBaseCommandService<RecipeViewModel> commandService,
-            IAppBaseQueryService<RecipeViewModel> queryService) : base(notifications, commandService, queryService)
+            IAppRecipeService appRecipeService) : base(notifications, appRecipeService)
         {
         }
 
@@ -26,7 +27,7 @@ namespace SweetGoods.Recipes.WebApi.Controllers
                 return Response(viewModel);
             }
 
-            CommandService<IAppRecipeCommandService>().AddCategory(viewModel);
+            appRecipeService.AddCategory(viewModel);
 
             return Response(viewModel);
         }

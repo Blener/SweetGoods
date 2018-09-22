@@ -1,21 +1,22 @@
-﻿using MediatR;
+﻿using GiftBagOfBases.Commands;
+using GiftBagOfBases.Interfaces.Domain;
+using GiftBagOfBases.Notifications;
+using MediatR;
 using SweetGoods.Recipes.Domain.Commands.Category;
-using SweetGoods.Recipes.Domain.Core.Bus;
-using SweetGoods.Recipes.Domain.Core.Notifications;
 using SweetGoods.Recipes.Domain.Events.Category;
-using SweetGoods.Recipes.Domain.Interfaces;
 using SweetGoods.Recipes.Domain.Interfaces.Commands;
 using SweetGoods.Recipes.Domain.Interfaces.Queries;
 using SweetGoods.Recipes.Domain.Models.Entities;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace SweetGoods.Recipes.Domain.Handlers.CommandHandlers
 {
     public class CategoryCommandHandler : CommandHandler,
-                                          IAsyncNotificationHandler<AddNewCategory>,
-                                          IAsyncNotificationHandler<UpdateCategory>,
-                                          IAsyncNotificationHandler<DeleteCategory>,
-                                          IAsyncNotificationHandler<RestoreDeletedCategory>
+                                          INotificationHandler<AddNewCategory>,
+                                          INotificationHandler<UpdateCategory>,
+                                          INotificationHandler<DeleteCategory>,
+                                          INotificationHandler<RestoreDeletedCategory>
     {
         private readonly ICategoryCommandRepository categoryCommandRepository;
         private readonly ICategoryQueryRepository categoryQueryRepository;
@@ -30,7 +31,7 @@ namespace SweetGoods.Recipes.Domain.Handlers.CommandHandlers
             this.categoryQueryRepository = categoryQueryRepository;
         }
 
-        public async Task Handle(AddNewCategory notification)
+        public async Task Handle(AddNewCategory notification, CancellationToken cancellationToken)
         {
             if (await categoryQueryRepository.NameExist(notification.Name.Name))
             {
@@ -48,7 +49,7 @@ namespace SweetGoods.Recipes.Domain.Handlers.CommandHandlers
             }
         }
 
-        public async Task Handle(UpdateCategory notification)
+        public async Task Handle(UpdateCategory notification, CancellationToken cancellationToken)
         {
             var categoryDb = await categoryQueryRepository.GetByAggregateId(notification.AggregateId);
 
@@ -68,7 +69,7 @@ namespace SweetGoods.Recipes.Domain.Handlers.CommandHandlers
             }
         }
 
-        public async Task Handle(DeleteCategory notification)
+        public async Task Handle(DeleteCategory notification, CancellationToken cancellationToken)
         {
             await categoryCommandRepository.Remove(notification.AggregateId);
 
@@ -78,7 +79,7 @@ namespace SweetGoods.Recipes.Domain.Handlers.CommandHandlers
             }
         }
 
-        public async Task Handle(RestoreDeletedCategory notification)
+        public async Task Handle(RestoreDeletedCategory notification, CancellationToken cancellationToken)
         {
             var categoryDb = await categoryQueryRepository.GetByAggregateId(notification.AggregateId);
 
@@ -88,9 +89,9 @@ namespace SweetGoods.Recipes.Domain.Handlers.CommandHandlers
                 return;
             }
 
-            var restoredCategory = categoryDb.GetRestored();
+            categoryDb.Rebirth();
 
-            categoryCommandRepository.Update(restoredCategory);
+            categoryCommandRepository.Update(categoryDb);
 
             if (Commit())
             {

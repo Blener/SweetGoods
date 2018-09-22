@@ -1,4 +1,4 @@
-﻿using SweetGoods.Recipes.Domain.Core.Models;
+﻿using GiftBagOfBases.Models;
 using System;
 
 namespace SweetGoods.Recipes.Domain.Models.Entities

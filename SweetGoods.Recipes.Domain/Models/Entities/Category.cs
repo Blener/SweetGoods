@@ -1,4 +1,4 @@
-﻿using SweetGoods.Recipes.Domain.Core.Models;
+﻿using GiftBagOfBases.Models;
 using SweetGoods.Recipes.Domain.Enums;
 using SweetGoods.Recipes.Domain.Models.ValueObjects;
 using System;
@@ -49,10 +49,5 @@ namespace SweetGoods.Recipes.Domain.Models.Entities
         public DescriptionValueObject Description { get; private set; }
 
         public int CategoryType { get; private set; }
-
-        public override Category GetRestored()
-        {
-            return new Category(IncrementId, Id, Name, Description, CategoryType, NotDeleted);
-        }
     }
 }

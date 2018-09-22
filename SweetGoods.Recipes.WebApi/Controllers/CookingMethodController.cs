@@ -1,19 +1,20 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using SweetGoods.Recipes.Application.ViewModels;
-using SweetGoods.Recipes.Domain.Core.Notifications;
+﻿using GiftBagOfBases.Controllers;
+using GiftBagOfBases.Notifications;
 using MediatR;
-using SweetGoods.Recipes.Application.Interfaces.Commands;
-using SweetGoods.Recipes.Application.Interfaces.Queries;
+using Microsoft.AspNetCore.Mvc;
+using SweetGoods.Recipes.Application.Interfaces;
+using SweetGoods.Recipes.Application.ViewModels;
 
 namespace SweetGoods.Recipes.WebApi.Controllers
 {
     [Route("CookingMethod")]
-    public class CookingMethodController : BaseMethodsController<CookingMethodViewModel>
+    public class CookingMethodController : GiftFullController<CookingMethodViewModel>
     {
-        protected CookingMethodController(
+        private IAppCookingMethodService AppCookingMethodService => appFullService as IAppCookingMethodService;
+
+        public CookingMethodController(
             INotificationHandler<DomainNotification> notifications,
-            IAppBaseCommandService<CookingMethodViewModel> commandService,
-            IAppBaseQueryService<CookingMethodViewModel> queryService) : base(notifications, commandService, queryService)
+            IAppCookingMethodService appCookingMethodService) : base(notifications, appCookingMethodService)
         {
         }
 
@@ -26,7 +27,7 @@ namespace SweetGoods.Recipes.WebApi.Controllers
                 return Response(viewModel);
             }
 
-            CommandService<IAppCookingMethodCommandService>().AddIngredient(viewModel);
+            AppCookingMethodService.AddIngredient(viewModel);
 
             return Response(viewModel);
         }
@@ -40,7 +41,7 @@ namespace SweetGoods.Recipes.WebApi.Controllers
                 return Response(viewModel);
             }
 
-            CommandService<IAppCookingMethodCommandService>().AddStep(viewModel);
+            AppCookingMethodService.AddStep(viewModel);
 
             return Response(viewModel);
         }

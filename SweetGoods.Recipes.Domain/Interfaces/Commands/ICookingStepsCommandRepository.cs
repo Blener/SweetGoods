@@ -1,8 +1,9 @@
-﻿using SweetGoods.Recipes.Domain.Models.Entities;
+﻿using GiftBagOfBases.Interfaces.Infra.Data;
+using SweetGoods.Recipes.Domain.Models.Entities;
 
 namespace SweetGoods.Recipes.Domain.Interfaces.Commands
 {
-    public interface ICookingStepsCommandRepository : ICommandRepository<CookingStep>
+    public interface ICookingStepsCommandRepository : ICommandOnlyRepository<CookingStep>
     {
     }
 }

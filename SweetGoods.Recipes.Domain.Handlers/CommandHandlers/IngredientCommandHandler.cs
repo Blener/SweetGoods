@@ -1,21 +1,22 @@
-﻿using System.Threading.Tasks;
+﻿using GiftBagOfBases.Commands;
+using GiftBagOfBases.Interfaces.Domain;
+using GiftBagOfBases.Notifications;
 using MediatR;
 using SweetGoods.Recipes.Domain.Commands.Ingredient;
-using SweetGoods.Recipes.Domain.Core.Bus;
-using SweetGoods.Recipes.Domain.Core.Notifications;
 using SweetGoods.Recipes.Domain.Events.Ingredient;
-using SweetGoods.Recipes.Domain.Interfaces;
 using SweetGoods.Recipes.Domain.Interfaces.Commands;
 using SweetGoods.Recipes.Domain.Interfaces.Queries;
 using SweetGoods.Recipes.Domain.Models.Entities;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace SweetGoods.Recipes.Domain.Handlers.CommandHandlers
 {
     public class IngredientCommandHandler : CommandHandler,
-                                            IAsyncNotificationHandler<AddNewIngredient>,
-                                            IAsyncNotificationHandler<UpdateIngredient>,
-                                            IAsyncNotificationHandler<DeleteIngredient>,
-                                            IAsyncNotificationHandler<RestoreDeletedIngredient>
+                                            INotificationHandler<AddNewIngredient>,
+                                            INotificationHandler<UpdateIngredient>,
+                                            INotificationHandler<DeleteIngredient>,
+                                            INotificationHandler<RestoreDeletedIngredient>
     {
         private readonly IIngredientCommandRepository ingredientCommandRepository;
         private readonly IIngredientQueryRepository ingredientQueryRepository;
@@ -31,7 +32,7 @@ namespace SweetGoods.Recipes.Domain.Handlers.CommandHandlers
             this.ingredientQueryRepository = ingredientQueryRepository;
         }
 
-        public async Task Handle(AddNewIngredient notification)
+        public async Task Handle(AddNewIngredient notification, CancellationToken cancellationToken)
         {
             var ingredient = new Ingredient(notification.Name, notification.Details);
 
@@ -43,7 +44,7 @@ namespace SweetGoods.Recipes.Domain.Handlers.CommandHandlers
             }
         }
 
-        public async Task Handle(UpdateIngredient notification)
+        public async Task Handle(UpdateIngredient notification, CancellationToken cancellationToken)
         {
             var ingredientDb = await ingredientQueryRepository.GetByAggregateId(notification.AggregateId);
 
@@ -63,7 +64,7 @@ namespace SweetGoods.Recipes.Domain.Handlers.CommandHandlers
             }
         }
 
-        public async Task Handle(DeleteIngredient notification)
+        public async Task Handle(DeleteIngredient notification, CancellationToken cancellationToken)
         {
             await ingredientCommandRepository.Remove(notification.AggregateId);
 
@@ -73,7 +74,7 @@ namespace SweetGoods.Recipes.Domain.Handlers.CommandHandlers
             }
         }
 
-        public async Task Handle(RestoreDeletedIngredient notification)
+        public async Task Handle(RestoreDeletedIngredient notification, CancellationToken cancellationToken)
         {
             var ingredientDb = await ingredientQueryRepository.GetByAggregateId(notification.AggregateId);
 
@@ -83,9 +84,9 @@ namespace SweetGoods.Recipes.Domain.Handlers.CommandHandlers
                 return;
             }
 
-            var restoredIngredient = ingredientDb.GetRestored();
+            ingredientDb.Rebirth();
 
-            ingredientCommandRepository.Update(restoredIngredient);
+            ingredientCommandRepository.Update(ingredientDb);
 
             if (Commit())
             {

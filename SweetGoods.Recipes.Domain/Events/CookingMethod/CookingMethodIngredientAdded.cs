@@ -1,8 +1,6 @@
-﻿using SweetGoods.Recipes.Domain.Core.Events;
+﻿using GiftBagOfBases.Events;
 using SweetGoods.Recipes.Domain.Enums;
 using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace SweetGoods.Recipes.Domain.Events.CookingMethod
 {

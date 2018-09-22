@@ -1,4 +1,4 @@
-﻿using SweetGoods.Recipes.Domain.Core.Commands;
+﻿using GiftBagOfBases.Commands;
 using System;
 
 namespace SweetGoods.Recipes.Domain.Commands.Recipe

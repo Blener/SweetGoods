@@ -1,11 +1,12 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using GiftBagOfBases.Contexts;
+using Microsoft.EntityFrameworkCore;
 using SweetGoods.Recipes.Domain.Models.Entities;
 using SweetGoods.Recipes.Infra.Data.Extensions;
 using SweetGoods.Recipes.Infra.Data.Mappings;
 
 namespace SweetGoods.Recipes.Infra.Data.Context
 {
-    public class SweetGoodsRecipesContext : ContextBase<SweetGoodsRecipesContext>
+    public class SweetGoodsRecipesContext : GiftContext<SweetGoodsRecipesContext>
     {
         public SweetGoodsRecipesContext(DbContextOptions<SweetGoodsRecipesContext> options) : base(options)
         {

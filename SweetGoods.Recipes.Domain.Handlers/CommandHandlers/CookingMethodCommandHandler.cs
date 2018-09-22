@@ -1,23 +1,24 @@
-﻿using MediatR;
+﻿using GiftBagOfBases.Commands;
+using GiftBagOfBases.Interfaces.Domain;
+using GiftBagOfBases.Notifications;
+using MediatR;
 using SweetGoods.Recipes.Domain.Commands.CookingMethod;
-using System.Threading.Tasks;
-using SweetGoods.Recipes.Domain.Interfaces;
-using SweetGoods.Recipes.Domain.Core.Bus;
-using SweetGoods.Recipes.Domain.Core.Notifications;
+using SweetGoods.Recipes.Domain.Events.CookingMethod;
 using SweetGoods.Recipes.Domain.Interfaces.Commands;
 using SweetGoods.Recipes.Domain.Interfaces.Queries;
 using SweetGoods.Recipes.Domain.Models.Entities;
-using SweetGoods.Recipes.Domain.Events.CookingMethod;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace SweetGoods.Recipes.Domain.Handlers.CommandHandlers
 {
     public class CookingMethodCommandHandler : CommandHandler,
-                                               IAsyncNotificationHandler<AddNewCookingMethod>,
-                                               IAsyncNotificationHandler<UpdateCookingMethod>,
-                                               IAsyncNotificationHandler<DeleteCookingMethod>,
-                                               IAsyncNotificationHandler<RestoreDeletedCookingMethod>,
-                                               IAsyncNotificationHandler<AddIngredient>,
-                                               IAsyncNotificationHandler<AddStep>
+                                               INotificationHandler<AddNewCookingMethod>,
+                                               INotificationHandler<UpdateCookingMethod>,
+                                               INotificationHandler<DeleteCookingMethod>,
+                                               INotificationHandler<RestoreDeletedCookingMethod>,
+                                               INotificationHandler<AddIngredient>,
+                                               INotificationHandler<AddStep>
     {
         private readonly ICookingMethodCommandRepository cookingMethodCommandRepository;
         private readonly ICookingMethodQueryRepository cookingMethodQueryRepository;
@@ -38,7 +39,7 @@ namespace SweetGoods.Recipes.Domain.Handlers.CommandHandlers
             this.ingredientQueryRepository = ingredientQueryRepository;
         }
 
-        public async Task Handle(AddNewCookingMethod notification)
+        public async Task Handle(AddNewCookingMethod notification, CancellationToken cancellationToken)
         {
             var cookingMethod = new CookingMethod(notification.RecipeAggregateId, notification.CookingTime, notification.Description);
 
@@ -50,7 +51,7 @@ namespace SweetGoods.Recipes.Domain.Handlers.CommandHandlers
             }
         }
 
-        public async Task Handle(UpdateCookingMethod notification)
+        public async Task Handle(UpdateCookingMethod notification, CancellationToken cancellationToken)
         {
             var cookingMethodDb = await cookingMethodQueryRepository.GetByAggregateId(notification.AggregateId);
 
@@ -70,7 +71,7 @@ namespace SweetGoods.Recipes.Domain.Handlers.CommandHandlers
             }
         }
 
-        public async Task Handle(DeleteCookingMethod notification)
+        public async Task Handle(DeleteCookingMethod notification, CancellationToken cancellationToken)
         {
             await cookingMethodCommandRepository.Remove(notification.AggregateId);
 
@@ -80,7 +81,7 @@ namespace SweetGoods.Recipes.Domain.Handlers.CommandHandlers
             }
         }
 
-        public async Task Handle(RestoreDeletedCookingMethod notification)
+        public async Task Handle(RestoreDeletedCookingMethod notification, CancellationToken cancellationToken)
         {
             var cookingMethodDb = await cookingMethodQueryRepository.GetByAggregateId(notification.AggregateId);
 
@@ -90,9 +91,9 @@ namespace SweetGoods.Recipes.Domain.Handlers.CommandHandlers
                 return;
             }
 
-            var restoredCookingMethod = cookingMethodDb.GetRestored();
+            cookingMethodDb.Rebirth();
 
-            cookingMethodCommandRepository.Update(restoredCookingMethod);
+            cookingMethodCommandRepository.Update(cookingMethodDb);
 
             if (Commit())
             {
@@ -100,7 +101,7 @@ namespace SweetGoods.Recipes.Domain.Handlers.CommandHandlers
             }
         }
 
-        public async Task Handle(AddIngredient notification)
+        public async Task Handle(AddIngredient notification, CancellationToken cancellationToken)
         {
             var cookingMethodExist = await cookingMethodQueryRepository.ExistAggregateId(notification.AggregateId);
             if (!cookingMethodExist)
@@ -135,7 +136,7 @@ namespace SweetGoods.Recipes.Domain.Handlers.CommandHandlers
             }
         }
 
-        public async Task Handle(AddStep notification)
+        public async Task Handle(AddStep notification, CancellationToken cancellationToken)
         {
             var cookingMethodExist = await cookingMethodQueryRepository.ExistAggregateId(notification.AggregateId);
             if (!cookingMethodExist)

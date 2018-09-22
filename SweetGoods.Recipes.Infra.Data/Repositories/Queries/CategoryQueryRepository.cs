@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using GiftBagOfBases.Repositories;
+using Microsoft.EntityFrameworkCore;
 using SweetGoods.Recipes.Domain.Interfaces.Queries;
 using SweetGoods.Recipes.Domain.Models.Entities;
 using SweetGoods.Recipes.Infra.Data.Context;
@@ -6,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace SweetGoods.Recipes.Infra.Data.Repositories.Queries
 {
-    public class CategoryQueryRepository : QueryRepository<Category, SweetGoodsRecipesContext>, ICategoryQueryRepository
+    public class CategoryQueryRepository : QueryOnlyRepository<Category, SweetGoodsRecipesContext>, ICategoryQueryRepository
     {
         public CategoryQueryRepository(SweetGoodsRecipesContext db) : base(db)
         {

@@ -1,9 +1,10 @@
-﻿using SweetGoods.Recipes.Domain.Models.ValueObjects;
+﻿using GiftBagOfBases.ViewModel;
+using SweetGoods.Recipes.Domain.Models.ValueObjects;
 using System.Collections.Generic;
 
 namespace SweetGoods.Recipes.Application.ViewModels
 {
-    public class RecipeViewModel : BaseViewModel
+    public class RecipeViewModel : GiftViewModel
     {
         public NameValueObject Name { get; set; }
 

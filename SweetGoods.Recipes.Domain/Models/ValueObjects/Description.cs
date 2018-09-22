@@ -1,4 +1,4 @@
-﻿using SweetGoods.Recipes.Domain.Core.Models;
+﻿using GiftBagOfBases.Models;
 using System.Collections.Generic;
 
 namespace SweetGoods.Recipes.Domain.Models.ValueObjects
@@ -16,9 +16,12 @@ namespace SweetGoods.Recipes.Domain.Models.ValueObjects
 
         public string Description { get; protected set; }
 
-        protected override IEnumerable<object> GetHashCodeCore()
+        protected override IEnumerable<int> GetHashCodeCore()
         {
-            yield return Description;
+            foreach (char c in Description)
+            {
+                yield return c * 87;
+            }
         }
     }
 }

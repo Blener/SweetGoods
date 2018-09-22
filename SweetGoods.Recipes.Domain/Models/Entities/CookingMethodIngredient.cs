@@ -1,4 +1,4 @@
-﻿using SweetGoods.Recipes.Domain.Core.Models;
+﻿using GiftBagOfBases.Models;
 using SweetGoods.Recipes.Domain.Enums;
 using System;
 

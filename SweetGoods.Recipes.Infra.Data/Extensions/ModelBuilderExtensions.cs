@@ -1,6 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
-using SweetGoods.Recipes.Domain.Core.Models;
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using GiftBagOfBases.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace SweetGoods.Recipes.Infra.Data.Extensions
 {

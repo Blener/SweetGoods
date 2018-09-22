@@ -1,15 +1,17 @@
-﻿using SweetGoods.Recipes.Application.Interfaces.Commands;
+﻿using AutoMapper;
+using GiftBagOfBases.Interfaces.Application;
+using GiftBagOfBases.Interfaces.Domain;
+using GiftBagOfBases.Services.Application;
+using SweetGoods.Recipes.Application.Interfaces;
 using SweetGoods.Recipes.Application.ViewModels;
 using SweetGoods.Recipes.Domain.Commands.Ingredient;
 using System;
-using SweetGoods.Recipes.Domain.Core.Bus;
-using AutoMapper;
 
-namespace SweetGoods.Recipes.Application.Services.Commands
+namespace SweetGoods.Recipes.Application.Services
 {
-    public class AppIngredientCommandService : AppCommandBaseService<IngredientViewModel>, IAppIngredientCommandService
+    public class AppIngredientService : AppFullService<IngredientViewModel>, IAppIngredientService
     {
-        public AppIngredientCommandService(IMediatorHandler bus, IMapper mapper) : base(bus, mapper)
+        public AppIngredientService(IMediatorHandler bus, IMapper mapper, IAppQueryOnlyService<IngredientViewModel> appQueryOnlyService) : base(bus, mapper, appQueryOnlyService)
         {
         }
 

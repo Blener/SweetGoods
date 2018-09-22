@@ -1,4 +1,4 @@
-﻿using SweetGoods.Recipes.Domain.Core.Models;
+﻿using GiftBagOfBases.Models;
 using SweetGoods.Recipes.Domain.Models.ValueObjects;
 using System;
 
@@ -26,10 +26,5 @@ namespace SweetGoods.Recipes.Domain.Models.Entities
         public NameValueObject Name { get; private set; }
 
         public string Details { get; private set; }
-
-        public override Ingredient GetRestored()
-        {
-            return new Ingredient(IncrementId, Id, Name, Details, NotDeleted);
-        }
     }
 }

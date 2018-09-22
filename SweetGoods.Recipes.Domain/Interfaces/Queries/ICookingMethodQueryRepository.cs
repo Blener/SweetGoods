@@ -1,8 +1,9 @@
-﻿using SweetGoods.Recipes.Domain.Models.Entities;
+﻿using GiftBagOfBases.Interfaces.Infra.Data;
+using SweetGoods.Recipes.Domain.Models.Entities;
 
 namespace SweetGoods.Recipes.Domain.Interfaces.Queries
 {
-    public interface ICookingMethodQueryRepository : IQueryRepository<CookingMethod>
+    public interface ICookingMethodQueryRepository : IQueryOnlyRepository<CookingMethod>
     {
     }
 }

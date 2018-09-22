@@ -1,5 +1,5 @@
-﻿using SweetGoods.Recipes.Domain.Core.Commands;
-using SweetGoods.Recipes.Domain.Interfaces;
+﻿using GiftBagOfBases.Commands;
+using GiftBagOfBases.Interfaces.Domain;
 using SweetGoods.Recipes.Infra.Data.Context;
 
 namespace SweetGoods.Recipes.Infra.Data.UoW

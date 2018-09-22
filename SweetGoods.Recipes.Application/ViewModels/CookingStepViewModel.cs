@@ -1,9 +1,10 @@
-﻿using Newtonsoft.Json;
+﻿using GiftBagOfBases.ViewModel;
+using Newtonsoft.Json;
 using System;
 
 namespace SweetGoods.Recipes.Application.ViewModels
 {
-    public class CookingStepViewModel : BaseViewModel
+    public class CookingStepViewModel : GiftViewModel
     {
         [JsonProperty("CookingMethodId")]
         public Guid CookingMethodAggregateId { get; set; }

@@ -1,19 +1,18 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using SweetGoods.Recipes.Application.ViewModels;
-using SweetGoods.Recipes.Domain.Core.Notifications;
+﻿using GiftBagOfBases.Controllers;
+using GiftBagOfBases.Notifications;
 using MediatR;
-using SweetGoods.Recipes.Application.Interfaces.Commands;
-using SweetGoods.Recipes.Application.Interfaces.Queries;
+using Microsoft.AspNetCore.Mvc;
+using SweetGoods.Recipes.Application.Interfaces;
+using SweetGoods.Recipes.Application.ViewModels;
 
 namespace SweetGoods.Recipes.WebApi.Controllers
 {
     [Route("Ingredient")]
-    public class IngredientController : BaseMethodsController<IngredientViewModel>
+    public class IngredientController : GiftFullController<IngredientViewModel>
     {
-        protected IngredientController(
+        public IngredientController(
             INotificationHandler<DomainNotification> notifications,
-            IAppBaseCommandService<IngredientViewModel> commandService,
-            IAppBaseQueryService<IngredientViewModel> queryService) : base(notifications, commandService, queryService)
+            IAppIngredientService appIngredientService) : base(notifications, appIngredientService)
         {
         }
     }

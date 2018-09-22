@@ -1,4 +1,4 @@
-﻿using SweetGoods.Recipes.Domain.Core.Events;
+﻿using GiftBagOfBases.Events;
 using System;
 
 namespace SweetGoods.Recipes.Domain.Events.Category

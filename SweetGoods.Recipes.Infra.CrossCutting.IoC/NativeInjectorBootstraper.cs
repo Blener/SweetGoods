@@ -1,31 +1,30 @@
-﻿using MediatR;
+﻿using GiftBagOfBases.Bus;
+using GiftBagOfBases.Contexts;
+using GiftBagOfBases.Events;
+using GiftBagOfBases.Events.Interfaces;
+using GiftBagOfBases.Interfaces.Domain;
+using GiftBagOfBases.Interfaces.Infra.Data;
+using GiftBagOfBases.Notifications;
+using GiftBagOfBases.Repositories;
+using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
-using SweetGoods.Recipes.Application.Interfaces.Commands;
-using SweetGoods.Recipes.Application.Interfaces.Queries;
-using SweetGoods.Recipes.Application.Services.Commands;
-using SweetGoods.Recipes.Application.Services.Queries;
+using SweetGoods.Recipes.Application.Interfaces;
+using SweetGoods.Recipes.Application.Services;
 using SweetGoods.Recipes.Domain.Commands.Category;
 using SweetGoods.Recipes.Domain.Commands.CookingMethod;
 using SweetGoods.Recipes.Domain.Commands.Ingredient;
 using SweetGoods.Recipes.Domain.Commands.Recipe;
-using SweetGoods.Recipes.Domain.Core.Bus;
-using SweetGoods.Recipes.Domain.Core.Events;
-using SweetGoods.Recipes.Domain.Core.Notifications;
 using SweetGoods.Recipes.Domain.Events.Category;
 using SweetGoods.Recipes.Domain.Events.CookingMethod;
 using SweetGoods.Recipes.Domain.Events.Ingredient;
 using SweetGoods.Recipes.Domain.Events.Recipe;
 using SweetGoods.Recipes.Domain.Handlers.CommandHandlers;
 using SweetGoods.Recipes.Domain.Handlers.EventHandlers;
-using SweetGoods.Recipes.Domain.Interfaces;
 using SweetGoods.Recipes.Domain.Interfaces.Commands;
 using SweetGoods.Recipes.Domain.Interfaces.Queries;
-using SweetGoods.Recipes.Infra.CrossCutting.Bus;
 using SweetGoods.Recipes.Infra.Data.Context;
-using SweetGoods.Recipes.Infra.Data.EventSourcing;
 using SweetGoods.Recipes.Infra.Data.Repositories.Commands;
-using SweetGoods.Recipes.Infra.Data.Repositories.EventSourcing;
 using SweetGoods.Recipes.Infra.Data.Repositories.Queries;
 using SweetGoods.Recipes.Infra.Data.UoW;
 
@@ -47,17 +46,10 @@ namespace SweetGoods.Recipes.Infra.CrossCutting.IoC
 
         private static void RegisterApplicationServices(IServiceCollection services)
         {
-            //Commands
-            services.AddScoped<IAppCategoryCommandService, AppCategoryCommandService>();
-            services.AddScoped<IAppCookingMethodCommandService, AppCookingMethodCommandService>();
-            services.AddScoped<IAppIngredientCommandService, AppIngredientCommandService>();
-            services.AddScoped<IAppRecipeCommandService, AppRecipeCommandService>();
-
-            //Queries
-            services.AddScoped<IAppCategoryQueryService, AppCategoryQueryService>();
-            services.AddScoped<IAppCookingMethodQueryService, AppCookingMethodQueryService>();
-            services.AddScoped<IAppIngredientQueryService, AppIngredientQueryService>();
-            services.AddScoped<IAppRecipeQueryService, AppRecipeQueryService>();
+            services.AddScoped<IAppCategoryService, AppCategoryService>();
+            services.AddScoped<IAppCookingMethodService, AppCookingMethodService>();
+            services.AddScoped<IAppIngredientService, AppIngredientService>();
+            services.AddScoped<IAppRecipeService, AppRecipeService>();
         }
 
         private static void RegisterDomainServices(IServiceCollection services)
@@ -69,61 +61,61 @@ namespace SweetGoods.Recipes.Infra.CrossCutting.IoC
         private static void RegisterDomainCommands(IServiceCollection services)
         {
             //Category
-            services.AddScoped<IAsyncNotificationHandler<AddNewCategory>, CategoryCommandHandler>();
-            services.AddScoped<IAsyncNotificationHandler<DeleteCategory>, CategoryCommandHandler>();
-            services.AddScoped<IAsyncNotificationHandler<RestoreDeletedCategory>, CategoryCommandHandler>();
-            services.AddScoped<IAsyncNotificationHandler<UpdateCategory>, CategoryCommandHandler>();
+            services.AddScoped<INotificationHandler<AddNewCategory>, CategoryCommandHandler>();
+            services.AddScoped<INotificationHandler<DeleteCategory>, CategoryCommandHandler>();
+            services.AddScoped<INotificationHandler<RestoreDeletedCategory>, CategoryCommandHandler>();
+            services.AddScoped<INotificationHandler<UpdateCategory>, CategoryCommandHandler>();
 
             //CookingMethod
-            services.AddScoped<IAsyncNotificationHandler<AddNewCookingMethod>, CookingMethodCommandHandler>();
-            services.AddScoped<IAsyncNotificationHandler<DeleteCookingMethod>, CookingMethodCommandHandler>();
-            services.AddScoped<IAsyncNotificationHandler<RestoreDeletedCookingMethod>, CookingMethodCommandHandler>();
-            services.AddScoped<IAsyncNotificationHandler<UpdateCookingMethod>, CookingMethodCommandHandler>();
-            services.AddScoped<IAsyncNotificationHandler<AddIngredient>, CookingMethodCommandHandler>();
-            services.AddScoped<IAsyncNotificationHandler<AddStep>, CookingMethodCommandHandler>();
+            services.AddScoped<INotificationHandler<AddNewCookingMethod>, CookingMethodCommandHandler>();
+            services.AddScoped<INotificationHandler<DeleteCookingMethod>, CookingMethodCommandHandler>();
+            services.AddScoped<INotificationHandler<RestoreDeletedCookingMethod>, CookingMethodCommandHandler>();
+            services.AddScoped<INotificationHandler<UpdateCookingMethod>, CookingMethodCommandHandler>();
+            services.AddScoped<INotificationHandler<AddIngredient>, CookingMethodCommandHandler>();
+            services.AddScoped<INotificationHandler<AddStep>, CookingMethodCommandHandler>();
 
             //Ingredient
-            services.AddScoped<IAsyncNotificationHandler<AddNewIngredient>, IngredientCommandHandler>();
-            services.AddScoped<IAsyncNotificationHandler<DeleteIngredient>, IngredientCommandHandler>();
-            services.AddScoped<IAsyncNotificationHandler<RestoreDeletedIngredient>, IngredientCommandHandler>();
-            services.AddScoped<IAsyncNotificationHandler<UpdateIngredient>, IngredientCommandHandler>();
+            services.AddScoped<INotificationHandler<AddNewIngredient>, IngredientCommandHandler>();
+            services.AddScoped<INotificationHandler<DeleteIngredient>, IngredientCommandHandler>();
+            services.AddScoped<INotificationHandler<RestoreDeletedIngredient>, IngredientCommandHandler>();
+            services.AddScoped<INotificationHandler<UpdateIngredient>, IngredientCommandHandler>();
 
             //Recipe
-            services.AddScoped<IAsyncNotificationHandler<AddNewRecipe>, RecipeCommandHandler>();
-            services.AddScoped<IAsyncNotificationHandler<DeleteRecipe>, RecipeCommandHandler>();
-            services.AddScoped<IAsyncNotificationHandler<RestoreDeletedRecipe>, RecipeCommandHandler>();
-            services.AddScoped<IAsyncNotificationHandler<UpdateRecipe>, RecipeCommandHandler>();
-            services.AddScoped<IAsyncNotificationHandler<AddCategory>, RecipeCommandHandler>();
+            services.AddScoped<INotificationHandler<AddNewRecipe>, RecipeCommandHandler>();
+            services.AddScoped<INotificationHandler<DeleteRecipe>, RecipeCommandHandler>();
+            services.AddScoped<INotificationHandler<RestoreDeletedRecipe>, RecipeCommandHandler>();
+            services.AddScoped<INotificationHandler<UpdateRecipe>, RecipeCommandHandler>();
+            services.AddScoped<INotificationHandler<AddCategory>, RecipeCommandHandler>();
         }
 
         private static void RegisterDomainEvents(IServiceCollection services)
         {
             //Category
-            services.AddScoped<IAsyncNotificationHandler<NewCategoryAdded>, CategoryEventHandler>();
-            services.AddScoped<IAsyncNotificationHandler<CategoryDeleted>, CategoryEventHandler>();
-            services.AddScoped<IAsyncNotificationHandler<DeletedCategoryRestored>, CategoryEventHandler>();
-            services.AddScoped<IAsyncNotificationHandler<CategoryUpdated>, CategoryEventHandler>();
+            services.AddScoped<INotificationHandler<NewCategoryAdded>, CategoryEventHandler>();
+            services.AddScoped<INotificationHandler<CategoryDeleted>, CategoryEventHandler>();
+            services.AddScoped<INotificationHandler<DeletedCategoryRestored>, CategoryEventHandler>();
+            services.AddScoped<INotificationHandler<CategoryUpdated>, CategoryEventHandler>();
 
             //CookingMethod
-            services.AddScoped<IAsyncNotificationHandler<NewCookingMethodAdded>, CookingMethodEventHandler>();
-            services.AddScoped<IAsyncNotificationHandler<CookingMethodDeleted>, CookingMethodEventHandler>();
-            services.AddScoped<IAsyncNotificationHandler<DeletedCookingMethodRestored>, CookingMethodEventHandler>();
-            services.AddScoped<IAsyncNotificationHandler<CookingMethodUpdated>, CookingMethodEventHandler>();
-            services.AddScoped<IAsyncNotificationHandler<CookingMethodIngredientAdded>, CookingMethodEventHandler>();
-            services.AddScoped<IAsyncNotificationHandler<CookingStepAdded>, CookingMethodEventHandler>();
+            services.AddScoped<INotificationHandler<NewCookingMethodAdded>, CookingMethodEventHandler>();
+            services.AddScoped<INotificationHandler<CookingMethodDeleted>, CookingMethodEventHandler>();
+            services.AddScoped<INotificationHandler<DeletedCookingMethodRestored>, CookingMethodEventHandler>();
+            services.AddScoped<INotificationHandler<CookingMethodUpdated>, CookingMethodEventHandler>();
+            services.AddScoped<INotificationHandler<CookingMethodIngredientAdded>, CookingMethodEventHandler>();
+            services.AddScoped<INotificationHandler<CookingStepAdded>, CookingMethodEventHandler>();
 
             //Ingredient
-            services.AddScoped<IAsyncNotificationHandler<NewIngredientAdded>, IngredientEventHandler>();
-            services.AddScoped<IAsyncNotificationHandler<IngredientDeleted>, IngredientEventHandler>();
-            services.AddScoped<IAsyncNotificationHandler<DeletedIngredientRestored>, IngredientEventHandler>();
-            services.AddScoped<IAsyncNotificationHandler<IngredientUpdated>, IngredientEventHandler>();
+            services.AddScoped<INotificationHandler<NewIngredientAdded>, IngredientEventHandler>();
+            services.AddScoped<INotificationHandler<IngredientDeleted>, IngredientEventHandler>();
+            services.AddScoped<INotificationHandler<DeletedIngredientRestored>, IngredientEventHandler>();
+            services.AddScoped<INotificationHandler<IngredientUpdated>, IngredientEventHandler>();
 
             //Recipe
-            services.AddScoped<IAsyncNotificationHandler<NewRecipeAdded>, RecipeEventHandler>();
-            services.AddScoped<IAsyncNotificationHandler<RecipeDeleted>, RecipeEventHandler>();
-            services.AddScoped<IAsyncNotificationHandler<DeletedRecipeRestored>, RecipeEventHandler>();
-            services.AddScoped<IAsyncNotificationHandler<RecipeUpdated>, RecipeEventHandler>();
-            services.AddScoped<IAsyncNotificationHandler<RecipeCategoryAdded>, RecipeEventHandler>();
+            services.AddScoped<INotificationHandler<NewRecipeAdded>, RecipeEventHandler>();
+            services.AddScoped<INotificationHandler<RecipeDeleted>, RecipeEventHandler>();
+            services.AddScoped<INotificationHandler<DeletedRecipeRestored>, RecipeEventHandler>();
+            services.AddScoped<INotificationHandler<RecipeUpdated>, RecipeEventHandler>();
+            services.AddScoped<INotificationHandler<RecipeCategoryAdded>, RecipeEventHandler>();
         }
 
         private static void RegisterInfraServices(IServiceCollection services)

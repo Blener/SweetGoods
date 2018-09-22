@@ -1,4 +1,4 @@
-﻿using SweetGoods.Recipes.Domain.Core.Models;
+﻿using GiftBagOfBases.Models;
 using SweetGoods.Recipes.Domain.Models.ValueObjects;
 using System;
 using System.Collections.Generic;
@@ -43,10 +43,5 @@ namespace SweetGoods.Recipes.Domain.Models.Entities
         public virtual ICollection<RecipeCategory> RecipeCategories { get; private set; }
 
         public virtual ICollection<CookingMethod> CookingMethods { get; private set; }
-
-        public override Recipe GetRestored()
-        {
-            return new Recipe(IncrementId, Id, Name, Description, NotDeleted);
-        }
     }
 }
