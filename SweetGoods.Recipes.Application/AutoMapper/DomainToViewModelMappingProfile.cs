@@ -13,19 +13,19 @@ namespace SweetGoods.Recipes.Application.AutoMapper
 
         private void RecipeMappings()
         {
-            CreateMap<Category, CategoryViewModel>().ReverseMap();
+            CreateMap<Category, CategoryViewModel>();
 
-            CreateMap<CookingMethod, CookingMethodViewModel>().ReverseMap();
+            CreateMap<CookingMethod, CookingMethodViewModel>();
 
-            CreateMap<CookingMethodIngredient, CookingMethodIngredientViewModel>().ReverseMap();
+            CreateMap<CookingMethodIngredient, CookingMethodIngredientViewModel>();
 
-            CreateMap<CookingStep, CookingStepViewModel>().ReverseMap();
+            CreateMap<CookingStep, CookingStepViewModel>();
 
-            CreateMap<Ingredient, IngredientViewModel>().ReverseMap();
+            CreateMap<Ingredient, IngredientViewModel>();
 
-            CreateMap<Recipe, RecipeViewModel>().ReverseMap();
+            CreateMap<Recipe, RecipeViewModel>();
 
-            CreateMap<RecipeCategory, RecipeCategoryViewModel>().ReverseMap();
+            CreateMap<RecipeCategory, RecipeCategoryViewModel>();
         }
     }
 }

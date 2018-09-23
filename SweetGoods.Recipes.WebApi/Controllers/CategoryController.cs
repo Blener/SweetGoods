@@ -1,8 +1,8 @@
 ﻿using GiftBagOfBases.Controllers;
-using GiftBagOfBases.Interfaces.Application;
 using GiftBagOfBases.Notifications;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using SweetGoods.Recipes.Application.Interfaces;
 using SweetGoods.Recipes.Application.ViewModels;
 
 namespace SweetGoods.Recipes.WebApi.Controllers
@@ -12,7 +12,7 @@ namespace SweetGoods.Recipes.WebApi.Controllers
     {
         public CategoryController(
             INotificationHandler<DomainNotification> notifications,
-            IAppFullService<CategoryViewModel> appFullService) : base(notifications, appFullService)
+            IAppCategoryService appFullService) : base(notifications, appFullService)
         {
         }
     }

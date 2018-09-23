@@ -1,13 +1,12 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using SweetGoods.Recipes.Domain.Models.Entities;
-using SweetGoods.Recipes.Infra.Data.Extensions;
 
 namespace SweetGoods.Recipes.Infra.Data.Mappings
 {
-    public class CookingMethodIngredientMap : EntityTypeConfiguration<CookingMethodIngredient>
+    public class CookingMethodIngredientMap : IEntityTypeConfiguration<CookingMethodIngredient>
     {
-        public override void Map(EntityTypeBuilder<CookingMethodIngredient> builder)
+        public void Configure(EntityTypeBuilder<CookingMethodIngredient> builder)
         {
             builder.HasOne(x => x.CookingMethod).WithMany(x => x.Ingredients);
 

@@ -18,10 +18,11 @@ namespace SweetGoods.Recipes.Domain.Models.ValueObjects
 
         protected override IEnumerable<int> GetHashCodeCore()
         {
-            foreach (char c in Name)
-            {
-                yield return c * 23;
-            }
+            yield return Name.GetHashCode();
         }
+
+        public static implicit operator string(NameValueObject nameValueObject) => nameValueObject.Name;
+
+        public static implicit operator NameValueObject(string name) => new NameValueObject(name);
     }
 }

@@ -53,7 +53,7 @@ namespace SweetGoods.Recipes.Domain.Handlers.CommandHandlers
 
         public async Task Handle(UpdateCookingMethod notification, CancellationToken cancellationToken)
         {
-            var cookingMethodDb = await cookingMethodQueryRepository.GetByAggregateId(notification.AggregateId);
+            var cookingMethodDb = await cookingMethodQueryRepository.Get(notification.AggregateId);
 
             if (cookingMethodDb == null)
             {
@@ -83,7 +83,7 @@ namespace SweetGoods.Recipes.Domain.Handlers.CommandHandlers
 
         public async Task Handle(RestoreDeletedCookingMethod notification, CancellationToken cancellationToken)
         {
-            var cookingMethodDb = await cookingMethodQueryRepository.GetByAggregateId(notification.AggregateId);
+            var cookingMethodDb = await cookingMethodQueryRepository.Get(notification.AggregateId);
 
             if (cookingMethodDb == null)
             {

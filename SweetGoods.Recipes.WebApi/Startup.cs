@@ -1,16 +1,18 @@
-﻿using System.IO;
-using AutoMapper;
+﻿using AutoMapper;
+using GiftBagOfBases.Contexts;
 using MediatR;
-using SweetGoods.Recipes.Infra.CrossCutting.IoC;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-
 using Newtonsoft.Json.Serialization;
 using Swashbuckle.AspNetCore.Swagger;
-using Microsoft.Extensions.PlatformAbstractions;
+using SweetGoods.Recipes.Application.AutoMapper;
+using SweetGoods.Recipes.Infra.CrossCutting.IoC;
+using SweetGoods.Recipes.Infra.Data.Context;
+using System.IO;
 
 namespace SweetGoods.Recipes.WebApi
 {
@@ -38,6 +40,12 @@ namespace SweetGoods.Recipes.WebApi
         {
             services.AddSingleton(Configuration);
 
+            services
+                .AddDbContext<SweetGoodsRecipesContext>(options =>
+                    options.UseSqlServer(Configuration.GetConnectionString("SweetGoodsRecipes")))
+                .AddDbContext<EventStoreSQLContext>(options =>
+                    options.UseSqlServer(Configuration.GetConnectionString("SweetGoodsES")));
+
             services.AddMvc().AddJsonOptions(opt =>
             {
                 opt.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
@@ -45,7 +53,7 @@ namespace SweetGoods.Recipes.WebApi
                 opt.SerializerSettings.NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore;
             });
 
-            services.AddAutoMapper();
+            services.AddAutoMapper(typeof(AutoMapperConfig).Assembly);
 
             services.AddSwaggerGen(c =>
             {

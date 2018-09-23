@@ -51,7 +51,7 @@ namespace SweetGoods.Recipes.Domain.Handlers.CommandHandlers
 
         public async Task Handle(UpdateCategory notification, CancellationToken cancellationToken)
         {
-            var categoryDb = await categoryQueryRepository.GetByAggregateId(notification.AggregateId);
+            var categoryDb = await categoryQueryRepository.Get(notification.AggregateId);
 
             if (categoryDb == null)
             {
@@ -81,7 +81,7 @@ namespace SweetGoods.Recipes.Domain.Handlers.CommandHandlers
 
         public async Task Handle(RestoreDeletedCategory notification, CancellationToken cancellationToken)
         {
-            var categoryDb = await categoryQueryRepository.GetByAggregateId(notification.AggregateId);
+            var categoryDb = await categoryQueryRepository.Get(notification.AggregateId);
 
             if (categoryDb == null)
             {

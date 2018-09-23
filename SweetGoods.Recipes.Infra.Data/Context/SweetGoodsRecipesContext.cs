@@ -1,7 +1,6 @@
 ﻿using GiftBagOfBases.Contexts;
 using Microsoft.EntityFrameworkCore;
 using SweetGoods.Recipes.Domain.Models.Entities;
-using SweetGoods.Recipes.Infra.Data.Extensions;
 using SweetGoods.Recipes.Infra.Data.Mappings;
 
 namespace SweetGoods.Recipes.Infra.Data.Context
@@ -14,13 +13,13 @@ namespace SweetGoods.Recipes.Infra.Data.Context
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.AddConfiguration(new CategoryMap());
-            modelBuilder.AddConfiguration(new CookingMethodMap());
-            modelBuilder.AddConfiguration(new CookingMethodIngredientMap());
-            modelBuilder.AddConfiguration(new CookingStepsMap());
-            modelBuilder.AddConfiguration(new IngredientMap());
-            modelBuilder.AddConfiguration(new RecipeCategoryMap());
-            modelBuilder.AddConfiguration(new RecipeMap());
+            modelBuilder.ApplyConfiguration(new CategoryMap());
+            modelBuilder.ApplyConfiguration(new CookingMethodMap());
+            modelBuilder.ApplyConfiguration(new CookingMethodIngredientMap());
+            modelBuilder.ApplyConfiguration(new CookingStepsMap());
+            modelBuilder.ApplyConfiguration(new IngredientMap());
+            modelBuilder.ApplyConfiguration(new RecipeCategoryMap());
+            modelBuilder.ApplyConfiguration(new RecipeMap());
 
             base.OnModelCreating(modelBuilder);
         }

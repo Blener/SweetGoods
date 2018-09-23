@@ -5,7 +5,7 @@ namespace SweetGoods.Recipes.Domain.Commands.Category
 {
     public class AddNewCategory : CategoryBaseCommand
     {
-        protected AddNewCategory(NameValueObject name, DescriptionValueObject description, CategoryType categoryType)
+        public AddNewCategory(NameValueObject name, DescriptionValueObject description, CategoryType categoryType)
         {
             Name = name;
             Description = description;

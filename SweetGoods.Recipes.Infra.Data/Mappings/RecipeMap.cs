@@ -1,13 +1,12 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using SweetGoods.Recipes.Domain.Models.Entities;
-using SweetGoods.Recipes.Infra.Data.Extensions;
 
 namespace SweetGoods.Recipes.Infra.Data.Mappings
 {
-    public class RecipeMap : EntityTypeConfiguration<Recipe>
+    public class RecipeMap : IEntityTypeConfiguration<Recipe>
     {
-        public override void Map(EntityTypeBuilder<Recipe> builder)
+        public void Configure(EntityTypeBuilder<Recipe> builder)
         {
             builder
                 .OwnsOne(x => x.Name)

@@ -55,7 +55,7 @@ namespace SweetGoods.Recipes.Domain.Handlers.CommandHandlers
 
         public async Task Handle(UpdateRecipe notification, CancellationToken cancellationToken)
         {
-            var recipeDb = await recipeQueryRepository.GetByAggregateId(notification.AggregateId);
+            var recipeDb = await recipeQueryRepository.Get(notification.AggregateId);
 
             if (recipeDb == null)
             {
@@ -85,7 +85,7 @@ namespace SweetGoods.Recipes.Domain.Handlers.CommandHandlers
 
         public async Task Handle(RestoreDeletedRecipe notification, CancellationToken cancellationToken)
         {
-            var recipeDb = await recipeQueryRepository.GetByAggregateId(notification.AggregateId);
+            var recipeDb = await recipeQueryRepository.Get(notification.AggregateId);
 
             if (recipeDb == null)
             {

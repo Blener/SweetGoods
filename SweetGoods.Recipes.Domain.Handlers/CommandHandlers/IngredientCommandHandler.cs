@@ -46,7 +46,7 @@ namespace SweetGoods.Recipes.Domain.Handlers.CommandHandlers
 
         public async Task Handle(UpdateIngredient notification, CancellationToken cancellationToken)
         {
-            var ingredientDb = await ingredientQueryRepository.GetByAggregateId(notification.AggregateId);
+            var ingredientDb = await ingredientQueryRepository.Get(notification.AggregateId);
 
             if (ingredientDb == null)
             {
@@ -76,7 +76,7 @@ namespace SweetGoods.Recipes.Domain.Handlers.CommandHandlers
 
         public async Task Handle(RestoreDeletedIngredient notification, CancellationToken cancellationToken)
         {
-            var ingredientDb = await ingredientQueryRepository.GetByAggregateId(notification.AggregateId);
+            var ingredientDb = await ingredientQueryRepository.Get(notification.AggregateId);
 
             if (ingredientDb == null)
             {

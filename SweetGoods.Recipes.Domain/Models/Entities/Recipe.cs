@@ -30,6 +30,7 @@ namespace SweetGoods.Recipes.Domain.Models.Entities
 
         public Recipe(NameValueObject name, DescriptionValueObject description)
         {
+            Id = Guid.NewGuid();
             Name = name;
             Description = description;
             RecipeCategories = new HashSet<RecipeCategory>();

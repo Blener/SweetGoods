@@ -4,13 +4,15 @@ using GiftBagOfBases.Services.Application;
 using SweetGoods.Recipes.Application.Interfaces;
 using SweetGoods.Recipes.Application.ViewModels;
 using SweetGoods.Recipes.Domain.Commands.Category;
+using SweetGoods.Recipes.Domain.Interfaces.Queries;
+using SweetGoods.Recipes.Domain.Models.Entities;
 using System;
 
 namespace SweetGoods.Recipes.Application.Services
 {
-    public class AppCategoryService : AppFullService<CategoryViewModel>, IAppCategoryService
+    public class AppCategoryService : AppFullService<CategoryViewModel, Category>, IAppCategoryService
     {
-        public AppCategoryService(IMediatorHandler bus, IMapper mapper, IAppCategoryService appCategoryService) : base(bus, mapper, appCategoryService)
+        public AppCategoryService(ICategoryQueryRepository categoryQueryRepository, IMediatorHandler bus, IMapper mapper) : base(categoryQueryRepository, bus, mapper)
         {
         }
 

@@ -8,6 +8,7 @@ using GiftBagOfBases.Notifications;
 using GiftBagOfBases.Repositories;
 using MediatR;
 using Microsoft.AspNetCore.Http;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using SweetGoods.Recipes.Application.Interfaces;
 using SweetGoods.Recipes.Application.Services;
@@ -123,7 +124,9 @@ namespace SweetGoods.Recipes.Infra.CrossCutting.IoC
             services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddScoped<IEventStore, SqlEventStore>();
             services.AddScoped<EventStoreSQLContext>();
+            services.AddScoped<DbContextOptions<EventStoreSQLContext>>();
             services.AddScoped<SweetGoodsRecipesContext>();
+            services.AddScoped<DbContextOptions<SweetGoodsRecipesContext>>();
         }
 
         private static void RegisterInfraRepositories(IServiceCollection services)

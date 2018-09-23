@@ -1,17 +1,18 @@
 ﻿using AutoMapper;
-using GiftBagOfBases.Interfaces.Application;
 using GiftBagOfBases.Interfaces.Domain;
 using GiftBagOfBases.Services.Application;
 using SweetGoods.Recipes.Application.Interfaces;
 using SweetGoods.Recipes.Application.ViewModels;
 using SweetGoods.Recipes.Domain.Commands.Recipe;
+using SweetGoods.Recipes.Domain.Interfaces.Queries;
+using SweetGoods.Recipes.Domain.Models.Entities;
 using System;
 
 namespace SweetGoods.Recipes.Application.Services
 {
-    public class AppRecipeService : AppFullService<RecipeViewModel>, IAppRecipeService
+    public class AppRecipeService : AppFullService<RecipeViewModel, Recipe>, IAppRecipeService
     {
-        public AppRecipeService(IMediatorHandler bus, IMapper mapper, IAppQueryOnlyService<RecipeViewModel> appQueryOnlyService) : base(bus, mapper, appQueryOnlyService)
+        public AppRecipeService(IRecipeQueryRepository recipeQueryRepository, IMediatorHandler bus, IMapper mapper) : base(recipeQueryRepository, bus, mapper)
         {
         }
 
