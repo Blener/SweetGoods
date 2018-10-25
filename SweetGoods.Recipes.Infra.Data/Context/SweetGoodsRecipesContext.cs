@@ -1,4 +1,5 @@
 ﻿using GiftBagOfBases.Contexts;
+using GiftBagOfBases.Mappings;
 using Microsoft.EntityFrameworkCore;
 using SweetGoods.Recipes.Domain.Models.Entities;
 using SweetGoods.Recipes.Infra.Data.Mappings;

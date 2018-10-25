@@ -1,14 +1,11 @@
 ﻿using GiftBagOfBases.Bus;
-using GiftBagOfBases.Contexts;
 using GiftBagOfBases.Events;
 using GiftBagOfBases.Events.Interfaces;
 using GiftBagOfBases.Interfaces.Domain;
 using GiftBagOfBases.Interfaces.Infra.Data;
 using GiftBagOfBases.Notifications;
-using GiftBagOfBases.Repositories;
 using MediatR;
 using Microsoft.AspNetCore.Http;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using SweetGoods.Recipes.Application.Interfaces;
 using SweetGoods.Recipes.Application.Services;
@@ -25,6 +22,7 @@ using SweetGoods.Recipes.Domain.Handlers.EventHandlers;
 using SweetGoods.Recipes.Domain.Interfaces.Commands;
 using SweetGoods.Recipes.Domain.Interfaces.Queries;
 using SweetGoods.Recipes.Infra.Data.Context;
+using SweetGoods.Recipes.Infra.Data.Repositories;
 using SweetGoods.Recipes.Infra.Data.Repositories.Commands;
 using SweetGoods.Recipes.Infra.Data.Repositories.Queries;
 using SweetGoods.Recipes.Infra.Data.UoW;
@@ -123,10 +121,6 @@ namespace SweetGoods.Recipes.Infra.CrossCutting.IoC
         {
             services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddScoped<IEventStore, SqlEventStore>();
-            services.AddScoped<EventStoreSQLContext>();
-            services.AddScoped<DbContextOptions<EventStoreSQLContext>>();
-            services.AddScoped<SweetGoodsRecipesContext>();
-            services.AddScoped<DbContextOptions<SweetGoodsRecipesContext>>();
         }
 
         private static void RegisterInfraRepositories(IServiceCollection services)

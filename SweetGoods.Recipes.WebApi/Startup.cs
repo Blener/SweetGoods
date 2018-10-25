@@ -1,5 +1,4 @@
 ﻿using AutoMapper;
-using GiftBagOfBases.Contexts;
 using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -44,7 +43,7 @@ namespace SweetGoods.Recipes.WebApi
                 .AddDbContext<SweetGoodsRecipesContext>(options =>
                     options.UseSqlServer(Configuration.GetConnectionString("SweetGoodsRecipes")))
                 .AddDbContext<EventStoreSQLContext>(options =>
-                    options.UseSqlServer(Configuration.GetConnectionString("SweetGoodsES")));
+                    options.UseSqlServer(Configuration.GetConnectionString("SweetGoodsRecipesES")));
 
             services.AddMvc().AddJsonOptions(opt =>
             {

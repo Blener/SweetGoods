@@ -5,6 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Context\SweetGoodsRecipesContextDesignTimeDbContextFactory.cs" />
     <Compile Remove="Migrations\20180505155126_InitialBaseSetup.cs" />
     <Compile Remove="Migrations\20180506165638_ChangesMVP_1.cs" />
     <Compile Remove="Migrations\20180506171326_Changes-MVP-1.cs" />

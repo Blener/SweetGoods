@@ -15,14 +15,7 @@ namespace SweetGoods.Recipes.Infra.Data.Repositories.Queries
 
         public Task<bool> NameExist(string name)
         {
-            try
-            {
-                return DbSet.AnyAsync(x => x.Name.Name == name);
-            }
-            catch (System.Exception ex)
-            {
-                throw;
-            }
+            return DbSet.AnyAsync(x => x.Name.Name == name);
         }
     }
 }

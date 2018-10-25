@@ -36,7 +36,6 @@ namespace SweetGoods.Recipes.Domain.Handlers.CommandHandlers
             if (await categoryQueryRepository.NameExist(notification.Name.Name))
             {
                 await RaiseDomainError(notification, "A category with that name already exist.");
-                return;
             }
 
             var category = new Category(notification.Name, notification.Description, notification.CategoryType);

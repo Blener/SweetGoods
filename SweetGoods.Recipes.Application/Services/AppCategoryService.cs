@@ -7,6 +7,7 @@ using SweetGoods.Recipes.Domain.Commands.Category;
 using SweetGoods.Recipes.Domain.Interfaces.Queries;
 using SweetGoods.Recipes.Domain.Models.Entities;
 using System;
+using System.Threading.Tasks;
 
 namespace SweetGoods.Recipes.Application.Services
 {
@@ -16,12 +17,12 @@ namespace SweetGoods.Recipes.Application.Services
         {
         }
 
-        public override void Add(CategoryViewModel viewModel) => MapAndSendCommand<AddNewCategory>(viewModel);
+        public override async Task Add(CategoryViewModel viewModel) => await MapAndSendCommand<AddNewCategory>(viewModel);
 
-        public override void Remove(Guid aggregateId) => MapAndSendCommand<DeleteCategory>(aggregateId);
+        public override Task Remove(Guid aggregateId) => MapAndSendCommand<DeleteCategory>(aggregateId);
 
-        public override void Restore(Guid aggregateId) => MapAndSendCommand<DeleteCategory>(aggregateId);
+        public override Task Restore(Guid aggregateId) => MapAndSendCommand<DeleteCategory>(aggregateId);
 
-        public override void Update(CategoryViewModel viewModel) => MapAndSendCommand<UpdateCategory>(viewModel);
+        public override Task Update(CategoryViewModel viewModel) => MapAndSendCommand<UpdateCategory>(viewModel);
     }
 }

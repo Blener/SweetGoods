@@ -7,6 +7,7 @@ using SweetGoods.Recipes.Domain.Commands.CookingMethod;
 using SweetGoods.Recipes.Domain.Interfaces.Queries;
 using SweetGoods.Recipes.Domain.Models.Entities;
 using System;
+using System.Threading.Tasks;
 
 namespace SweetGoods.Recipes.Application.Services
 {
@@ -16,16 +17,16 @@ namespace SweetGoods.Recipes.Application.Services
         {
         }
 
-        public override void Add(CookingMethodViewModel viewModel) => MapAndSendCommand<AddNewCookingMethod>(viewModel);
+        public async override Task Add(CookingMethodViewModel viewModel) => await MapAndSendCommand<AddNewCookingMethod>(viewModel);
 
-        public void AddIngredient(CookingMethodIngredientViewModel viewModel) => MapAndSendCommand<AddIngredient, CookingMethodIngredientViewModel>(viewModel);
+        public async Task AddIngredient(CookingMethodIngredientViewModel viewModel) => await MapAndSendCommand<AddIngredient, CookingMethodIngredientViewModel>(viewModel);
 
-        public void AddStep(CookingStepViewModel viewModel) => MapAndSendCommand<AddStep, CookingStepViewModel>(viewModel);
+        public async Task AddStep(CookingStepViewModel viewModel) => await MapAndSendCommand<AddStep, CookingStepViewModel>(viewModel);
 
-        public override void Remove(Guid aggregateId) => MapAndSendCommand<DeleteCookingMethod>(aggregateId);
+        public override async Task Remove(Guid aggregateId) => await MapAndSendCommand<DeleteCookingMethod>(aggregateId);
 
-        public override void Restore(Guid aggregateId) => MapAndSendCommand<RestoreDeletedCookingMethod>(aggregateId);
+        public override async Task Restore(Guid aggregateId) => await MapAndSendCommand<RestoreDeletedCookingMethod>(aggregateId);
 
-        public override void Update(CookingMethodViewModel viewModel) => MapAndSendCommand<UpdateCookingMethod>(viewModel);
+        public override async Task Update(CookingMethodViewModel viewModel) => await MapAndSendCommand<UpdateCookingMethod>(viewModel);
     }
 }

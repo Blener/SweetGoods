@@ -8,6 +8,11 @@ namespace SweetGoods.Recipes.Infra.Data.Mappings
     {
         public void Configure(EntityTypeBuilder<CookingMethod> builder)
         {
+            builder.Property(x => x.IncrementId)
+                .ValueGeneratedOnAdd();
+            builder.HasKey(x => x.Id);
+            builder.Property(x => x.Id).IsRequired();
+
             builder
                 .OwnsOne(x => x.Description)
                 .Property(x => x.Description)

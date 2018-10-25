@@ -8,6 +8,11 @@ namespace SweetGoods.Recipes.Infra.Data.Mappings
     {
         public void Configure(EntityTypeBuilder<CookingStep> builder)
         {
+            builder.Property(x => x.IncrementId)
+                .ValueGeneratedOnAdd();
+            builder.HasKey(x => x.Id);
+            builder.Property(x => x.Id).IsRequired();
+
             builder.Property(x => x.StepAction).HasColumnType("nvarchar(500)");
         }
     }

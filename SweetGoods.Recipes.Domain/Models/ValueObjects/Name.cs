@@ -1,4 +1,5 @@
 ﻿using GiftBagOfBases.Models;
+using Newtonsoft.Json;
 using System.Collections.Generic;
 
 namespace SweetGoods.Recipes.Domain.Models.ValueObjects
