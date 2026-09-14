@@ -50,7 +50,7 @@ project.lock.json
 project.fragment.lock.json
 artifacts/
 **/Properties/launchSettings.json
-SweetGoods.Recipes.WebApi/appsettings.development.json
+SweetGoods.Recipes.WebApi/appsettings.Development.json
 
 *_i.c
 *_p.c
